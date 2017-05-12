@@ -1,0 +1,2 @@
+class Neighbood < ApplicationRecord
+end
