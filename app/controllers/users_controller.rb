@@ -10,6 +10,8 @@ class UsersController < ApplicationController
     unless @user == current_user
       redirect_to :back, :alert => "Acesso proibido"
     end
+    if @user == current_user
+      redirect_to userdata_path(:user_id => @user.id)
+    end
   end
-
 end
