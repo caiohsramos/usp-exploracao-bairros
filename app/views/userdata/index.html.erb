@@ -14,14 +14,24 @@
       <tr>
         <td><%= userdatum.name %></td>
         <td><%= userdatum.comment %></td>
-        <td><%= link_to 'Mostrar', userdatum, class: "btn btn-success" %></td>
-        <td><%= link_to 'Editar', edit_userdatum_path(userdatum), class: "btn btn-warning" %></td>
-        <td><%= link_to 'Apagar', userdatum, method: :delete, data: { confirm: 'Você tem certeza?' }, class: "btn btn-danger" %></td>
+        <td><%= link_to 'Mostrar', userdatum, class: 'btn btn-success' %></td>
+        <td><%= link_to 'Editar', edit_userdatum_path(userdatum), class: 'btn btn-warning' %></td>
+        <td><%= link_to 'Apagar', userdatum, method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<%= link_to 'Adicionar novo Dado', new_userdatum_path, class: 'btn btn-primary' %>
+
 <br>
 
-<%= link_to 'Adicionar novo Dado', new_userdatum_path, class: "btn btn-primary" %>
+<%= form_tag search_index_path, method: :get, class: 'form-inline' do %>
+    <div class="form-group">
+        <%= text_field_tag :search, nil, placeholder: 'Onde você está?', class: 'form-control' %>
+    </div>
+    <div class="form-group">
+        <%= text_field_tag :radius, nil, placeholder: 'Informe o raio de busca', class: 'form-control' %>
+    </div>
+    <%= button_to 'Buscar', nil, class: 'btn btn-default' %>
+<% end %>

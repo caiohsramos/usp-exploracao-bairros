@@ -1,0 +1,14 @@
+<% @results.each do |result| %>
+
+    <h4><%= result['name'] %></h4>
+
+    <p>
+        <% result['types'].each do |type| %>
+        <span class='label label-info'><%= @dict[type.to_sym] %></span>
+        <% end %>
+
+        <% if result['opening_hours'] != nil %>
+            <span class='label label-success'><%= 'aberto agora' if not result['opening_hours']['open_now'] %></span>
+        <% end %>
+    </p>
+<% end %>
