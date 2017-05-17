@@ -47,7 +47,7 @@ class UserdataController < ApplicationController
   def update
     respond_to do |format|
       if @userdatum.update(userdatum_params)
-        format.html { redirect_to @userdatum, notice: 'Dado atualizado com sucesso' }
+        format.html { redirect_to userdata_path, notice: 'Dado atualizado com sucesso' }
         format.json { render :show, status: :ok, location: @userdatum }
       else
         format.html { render :edit }
@@ -74,6 +74,6 @@ class UserdataController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def userdatum_params
-      params.require(:userdatum).permit(:name, :comment)
+      params.require(:userdatum).permit(:name, :comment, :place_id)
     end
 end
