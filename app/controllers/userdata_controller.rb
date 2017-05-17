@@ -13,15 +13,12 @@ class UserdataController < ApplicationController
   # GET /userdata/1
   # GET /userdata/1.json
   def show
-    url = URI.encode("https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{@userdatum.name}&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
-    @data = JSON.load(open(url))
-    @name = @data['results'][0]['name']
-    @formatted_address = @data['results'][0]['formatted_address']
+    redirect_to search_show_path :place_id => @userdatum.place_id
   end
 
   # GET /userdata/new
   def new
-    @userdatum = Userdatum.new
+    @userdatum = Userdatum.new(:name => params[:name], :place_id => params[:place_id])
   end
 
   # GET /userdata/1/edit
@@ -36,7 +33,7 @@ class UserdataController < ApplicationController
 
     respond_to do |format|
       if @userdatum.save
-        format.html { redirect_to @userdatum, notice: 'Dado adicionado com sucesso' }
+        format.html { redirect_to search_index_path, notice: 'Dado adicionado com sucesso' }
         format.json { render :show, status: :created, location: @userdatum }
       else
         format.html { render :new }
