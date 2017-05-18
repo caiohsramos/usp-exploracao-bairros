@@ -5,8 +5,7 @@ class UserdataController < ApplicationController
   # GET /userdata
   # GET /userdata.json
   def index
-    session[:user_id] = params[:user_id] if params[:user_id] != nil
-
+    session[:user_id] = params[:user_id] if params[:user_id]
     @userdata = Userdatum.where(:user_id => session[:user_id])
   end
 
