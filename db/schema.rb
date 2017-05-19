@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20170512140610) do
+ActiveRecord::Schema.define(version: 20170517155221) do
 
   create_table "neighborhoods", force: :cascade do |t|
     t.string   "name",       default: ""
@@ -24,8 +23,7 @@ ActiveRecord::Schema.define(version: 20170512140610) do
   create_table "obfuscates", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-=======
-ActiveRecord::Schema.define(version: 20170517155221) do
+  end
 
   create_table "userdata", force: :cascade do |t|
     t.string   "name"
@@ -34,7 +32,6 @@ ActiveRecord::Schema.define(version: 20170517155221) do
     t.datetime "updated_at", null: false
     t.integer  "user_id"
     t.string   "place_id"
->>>>>>> ea760f78acb19afd1d9b0ddccaa4592d48db1e3b
   end
 
   create_table "users", force: :cascade do |t|
