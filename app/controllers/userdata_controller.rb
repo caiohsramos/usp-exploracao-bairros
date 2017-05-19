@@ -5,19 +5,21 @@ class UserdataController < ApplicationController
   # GET /userdata
   # GET /userdata.json
   def index
-    session[:user_id] = params[:user_id] if params[:user_id]
-    @userdata = Userdatum.where(:user_id => session[:user_id])
+    #session[:user_id] = params[:user_id] if params[:user_id]
+    @userdata = Userdatum.where(:user_id => current_user)
   end
 
   # GET /userdata/1
   # GET /userdata/1.json
   def show
+      puts "userdatum: #{@userdatum.place_id}"
     redirect_to search_show_path :place_id => @userdatum.place_id
   end
 
   # GET /userdata/new
   def new
     @userdatum = Userdatum.new(:name => params[:name], :place_id => params[:place_id])
+      session[:place_id] = params[:place_id]
   end
 
   # GET /userdata/1/edit
@@ -28,7 +30,10 @@ class UserdataController < ApplicationController
   # POST /userdata.json
   def create
     @userdatum = Userdatum.new(userdatum_params)
-    @userdatum.user = User.find (session[:user_id])
+      @userdatum.place_id = session[:place_id]
+      
+      puts "place_id2: #{@userdatum.place_id}"
+    @userdatum.user = current_user
 
     respond_to do |format|
       if @userdatum.save
@@ -68,7 +73,8 @@ class UserdataController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_userdatum
-      @userdatum = Userdatum.find User.decrypt (params[:id])
+      @userdatum = Userdatum.find Userdatum.decrypt (params[:id])
+        puts "@userdatum: #{@userdatum.place_id}"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

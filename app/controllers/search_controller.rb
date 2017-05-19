@@ -21,6 +21,7 @@ class SearchController < ApplicationController
     end
 
     def show
+        puts "place_id: #{params[:place_id]}"
         session[:place_id] = params[:place_id] if params[:place_id]
         @place_id = session[:place_id]
         url = URI.encode("https://maps.googleapis.com/maps/api/place/details/json?placeid=#{@place_id}&language=pt-BR&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
