@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :neighborhoods
     resources :userdata
     resources :search
+    resources :reviews
     
     post "/search/show" => "search#show"
-   
   end

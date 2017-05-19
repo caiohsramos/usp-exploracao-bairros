@@ -31,6 +31,25 @@ class SearchController < ApplicationController
         @formatted_address = result['formatted_address']
         @formatted_number = result['formatted_phone_number']
         opening_hours = result['opening_hours']
+        
+        
+        @reviews = Review.where("place_id = ?", session[:place_id])
+        @review = Review.new
+        @stars = 0.0
+        count = 0
+        
+        @reviews.each do |review|
+            @stars = @stars + review.rate
+            puts "stars: #{@stars}"
+            count = count + 1
+        end
+        
+        if (count == 0)
+            count = 1
+        end
+        
+        @stars = @stars / count
+        
         if opening_hours
             @weekday_text = opening_hours['weekday_text']
         else

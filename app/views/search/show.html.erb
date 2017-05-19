@@ -1,4 +1,6 @@
 <div>
+   <div class="row">
+   <div class="col-md-8">
     <h2><%= @name %></h2>
 
     <br>
@@ -17,7 +19,12 @@
     <% @weekday_text.each do |day| %>
         <address><%= day %></address>
     <% end %>
-
+    
+    
+    <h4>Nota</h4>
+    <address><%= @stars %></address>
+    </div>
+    </div>
     <br>
 
     <h4>Mapa:</h4>
@@ -29,6 +36,42 @@
         <%= link_to 'Adicionar local', new_userdatum_path(:name => @name, :place_id => @place_id), class: 'btn btn-primary' if user_signed_in? %>
         <%= link_to 'Voltar', :back, class: 'btn btn-default' %>
     </p>
+    
+    
+    <div class="authform">
+  <%= form_for @review do |f| %>
+    <div class="form-group">
+      <%= f.label :comment %>
+      <%= f.text_field :comment, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :rate %>
+      <%= f.select(:rate, get_ratings, {:selected => nil}, {:class => 'form-control'}) %>
+    </div>
+    
+     <%= f.submit 'Add Comment', :class => 'button right' %>
+  <% end %>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Review</th>
+      <th>Nota</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td><%= review.comment %></td>
+        <td><%= review.rate %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 </div>
 
 

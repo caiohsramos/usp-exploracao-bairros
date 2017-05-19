@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517155221) do
+ActiveRecord::Schema.define(version: 20170519182835) do
 
   create_table "neighborhoods", force: :cascade do |t|
     t.string   "name",       default: ""
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20170517155221) do
   end
 
   create_table "obfuscates", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "place_id"
+    t.text     "comment"
+    t.integer  "rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
