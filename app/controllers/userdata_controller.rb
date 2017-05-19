@@ -12,7 +12,7 @@ class UserdataController < ApplicationController
   # GET /userdata/1
   # GET /userdata/1.json
   def show
-    redirect_to search_show_path :place_id => @userdatum.place_id
+    redirect_to search_show_path(:place_id => @userdatum.place_id)
   end
 
   # GET /userdata/new
