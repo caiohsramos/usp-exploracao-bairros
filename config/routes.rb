@@ -6,4 +6,6 @@ Rails.application.routes.draw do
     resources :neighborhoods
     resources :userdata
     resources :search
+    
+    get "/search/show" => "search#show"
   end
