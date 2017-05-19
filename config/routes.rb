@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   get "/search/index" => "search#index"
-  get "/search/show" => "search#show"
+  get "/search/show" => "search#show", as: :search_show
   end
