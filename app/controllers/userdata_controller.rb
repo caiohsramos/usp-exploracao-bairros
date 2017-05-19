@@ -28,7 +28,7 @@ class UserdataController < ApplicationController
   # POST /userdata.json
   def create
     @userdatum = Userdatum.new(userdatum_params)
-    @userdatum.user = User.find(session[:user_id])
+    @userdatum.user = User.find User.decrypt (session[:user_id])
 
     respond_to do |format|
       if @userdatum.save
@@ -68,7 +68,7 @@ class UserdataController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_userdatum
-      @userdatum = Userdatum.find(params[:id])
+      @userdatum = Userdatum.find User.decrypt (params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

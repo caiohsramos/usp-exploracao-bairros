@@ -1,17 +1,26 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+    before_action :authenticate_user!
 
-  def index
-    @users = User.all
-  end
+    def index
+        @users = User.all
+    end
 
-  def show
-    @user = User.find(params[:id])
-    unless @user == current_user
-      redirect_to :back, :alert => "Acesso proibido"
+    def show
+        @user = User.find User.decrypt params[:id]
+              
+        unless @user == current_user
+            redirect_to :back, :alert => "Access denied."
+        end
     end
-    if @user == current_user
-      redirect_to userdata_path(:user_id => @user.id)
+
+    def show
+        @user = User.find User.decrypt params[:id]
+        
+        unless @user == current_user
+            redirect_to :back, :alert => "Acesso proibido"
+        end
+        
+        
     end
-  end
+
 end
