@@ -5,7 +5,6 @@ class UsersController < ApplicationController
         @users = User.all
     end
 
-<<<<<<< HEAD
     def show
         @user = User.find User.decrypt params[:id]
               
@@ -14,15 +13,14 @@ class UsersController < ApplicationController
         end
     end
 
-=======
-  def show
-    @user = User.find(params[:id])
-    unless @user == current_user
-      redirect_to :back, :alert => "Acesso proibido"
+    def show
+        @user = User.find User.decrypt params[:id]
+        
+        unless @user == current_user
+            redirect_to :back, :alert => "Acesso proibido"
+        end
+        
+        
     end
-    if @user == current_user
-      redirect_to userdata_path(:user_id => @user.id)
-    end
-  end
->>>>>>> ea760f78acb19afd1d9b0ddccaa4592d48db1e3b
+
 end
