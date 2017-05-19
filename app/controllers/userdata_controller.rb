@@ -28,7 +28,7 @@ class UserdataController < ApplicationController
   # POST /userdata.json
   def create
     @userdatum = Userdatum.new(userdatum_params)
-    @userdatum.user = User.find User.decrypt (session[:user_id])
+    @userdatum.user = User.find (session[:user_id])
 
     respond_to do |format|
       if @userdatum.save
