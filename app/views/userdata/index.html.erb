@@ -4,7 +4,7 @@
     <br>
 
     <b>Faça uma busca:</b>
-    <%= form_tag search_index_path, method: :post, class: 'form-inline' do %>
+    <%= form_tag search_path, method: :post, class: 'form-inline' do %>
         <div class="form-group">
             <%= text_field_tag :search, nil, placeholder: 'Onde você está? (ex: endereço, bairro, local, estabelecimento, etc...)', size: 55, class: 'form-control' %>
         </div>

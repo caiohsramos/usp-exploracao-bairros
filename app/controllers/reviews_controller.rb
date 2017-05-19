@@ -8,8 +8,14 @@ class ReviewsController < ApplicationController
         @review.user_id = current_user.id
         @review.place_id = session[:place_id]
         
-        if @review.save!
-            redirect_to search_show_path
+        alreadyReviewd = nil
+        alreadyReviewd = Review.where("user_id = ?", current_user.id)
+        
+        if alreadyReviewd.nil? and @review.save!
+            redirect_to search_show_path, :flash => {notice => "Comentario adiciondo com sucesso."}
+            
+        else
+            redirect_to search_show_path, alert: "Erro! Você ja comentou sobre esse local."
         end
         
     end
