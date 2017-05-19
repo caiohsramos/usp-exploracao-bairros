@@ -1,0 +1,40 @@
+<div>
+    <h2>Painel do Usuário</h2>
+
+    <br>
+
+    <b>Faça uma busca:</b>
+    <%= form_tag search_index_path, method: :get, class: 'form-inline' do %>
+        <div class="form-group">
+            <%= text_field_tag :search, nil, placeholder: 'Onde você está? (ex: endereço, bairro, local, estabelecimento, etc...)', size: 55, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+            <%= text_field_tag :radius, nil, placeholder: 'Informe o raio de busca (em metros)', size: 30, class: 'form-control' %>
+        </div>
+        <%= button_to 'Buscar', nil, class: 'btn btn-primary' %>
+    <% end %>
+</div>
+
+<br>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Nome do local</th>
+      <th>Comentário</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @userdata.each do |userdatum| %>
+      <tr>
+        <td><%= userdatum.name %></td>
+        <td><%= userdatum.comment %></td>
+        <td><%= link_to 'Mostrar', userdatum, class: 'btn btn-success' %></td>
+        <td><%= link_to 'Editar', edit_userdatum_path(userdatum), class: 'btn btn-warning' %></td>
+        <td><%= link_to 'Apagar', userdatum, method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

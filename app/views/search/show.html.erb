@@ -1,0 +1,37 @@
+<div>
+    <h2><%= @name %></h2>
+
+    <br>
+
+    <h4>Endereço: </h4>
+    <address><%= @formatted_address %></address>
+
+    <br>
+
+    <h4>Telefone: </h4>
+    <address><%= @formatted_number %></address>
+
+    <br>
+
+    <h4>Horário de Funcionamento:</h4>
+    <% @weekday_text.each do |day| %>
+        <address><%= day %></address>
+    <% end %>
+
+    <br>
+
+    <h4>Mapa:</h4>
+    <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @formatted_address %>&size=640x640&markers=color:red|<%= @formatted_address %>&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM" class="img-thumbnail" >
+
+    <br>
+
+    <p>
+        <%= link_to 'Adicionar local', new_userdatum_path(:name => @name, :place_id => @place_id), class: 'btn btn-primary' if user_signed_in? %>
+        <%= link_to 'Voltar', :back, class: 'btn btn-default' %>
+    </p>
+</div>
+
+
+
+
+

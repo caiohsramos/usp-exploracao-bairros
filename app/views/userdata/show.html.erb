@@ -1,0 +1,21 @@
+<p>
+  <strong>Nome:</strong>
+  <%= @userdatum.name %>
+</p>
+
+<p>
+  <strong>Comentário:</strong>
+  <%= @userdatum.comment %>
+</p>
+
+<%= link_to 'Editar', edit_userdatum_path(@userdatum), class: "btn btn-warning" %>
+<%= link_to 'Voltar', userdata_path, class: "btn btn-default" %>
+
+
+<div class="row">
+    <div class="col-md-4"><img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @formatted_address %>&size=640x640&markers=color:red|<%= @formatted_address %>&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM" class="img-thumbnail" ></div>
+    <div class="col-md-8">
+        <h1><%= @name %></h1>
+        <adress>Endereço: <%= @formatted_address %></adress>
+    </div>
+</div>
