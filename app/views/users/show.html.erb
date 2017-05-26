@@ -2,5 +2,4 @@
 <p>Name: <%= @user.name if @user.name %></p>
 <p>Email: <%= @user.email if @user.email %></p>
 
-<%= link_to "Adicionar amigo", add_friend_path %>
-
+<%= link_to "Adicionar amigo", add_friend_path, {class: "btn btn-default"} %>
