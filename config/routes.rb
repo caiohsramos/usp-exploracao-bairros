@@ -18,4 +18,5 @@ Rails.application.routes.draw do
     match 'user/:id/accept_friend' => 'users#accept_friend', as: :accept_friend, via: 'get'
     match 'user/friends' => 'users#friends', as: :friends, via: 'get'
     match 'user/cancel_friend' => 'users#cancel_friend', as: :cancel_friend, via: 'delete'
+    match 'user/cancel_request' => 'users#cancel_request', as: :cancel_request, via: 'delete'
   end
