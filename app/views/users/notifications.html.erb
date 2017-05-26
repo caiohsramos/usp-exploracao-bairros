@@ -13,7 +13,7 @@
         <td><%= User.find(friend.user_id).name %></td>
         <td><%= User.find(friend.friend_id).name %></td>
         <td><%= link_to 'Aceitar', accept_friend_path(id: User.encrypt(current_user.id), friend_id: User.encrypt(friend.user_id)), class: 'btn btn-success' %></td>
-        <td><%= link_to 'Recusar convite', cancel_friend_path(friend_id: User.encrypt(friend.friend_id)), method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger' %></td>
+        <td><%= link_to 'Recusar convite', cancel_request_path(friend_id: User.encrypt(friend.user_id)), method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>

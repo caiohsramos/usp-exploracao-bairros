@@ -23,12 +23,19 @@ class UsersController < ApplicationController
         @user = User.find current_user.id
         @friend = User.find User.decrypt params[:id]
         
-        @friendship = Friend.new(user_id: @user.id, friend_id: @friend.id, status: 1)
+        checkFriend = Friend.where("user_id = ?", @user.id).where("friend_id = ? ", @friend.id).first
         
-        if @friendship.save!
-            redirect_to user_path(id: User.encrypt(@friend.id)), :flash => {:notice => "Solicitação feita com sucesso."}
+        if !checkFriend
+        
+            @friendship = Friend.new(user_id: @user.id, friend_id: @friend.id, status: 1)
+        
+            if @friendship.save!
+                redirect_to user_path(id: User.encrypt(@friend.id)), :flash => {:notice => "Solicitação feita com sucesso."}
+            else
+                redirect_to :back, :alert => "Problema ao solicitar amizade."
+            end
         else
-            redirect_to :back, :alert => "Problema ao solicitar amizade."
+            redirect_to :back, :alert => "Você ja solicitou essa amizade amizade."
         end
     end
     
@@ -36,6 +43,7 @@ class UsersController < ApplicationController
         @user = current_user
         
         @friends = Friend.where("friend_id = ?", @user.id)
+        puts "not: user=> #{@user.id}"
         @friendRequest = Array.new
         
         @friends.each do |friend|
@@ -83,6 +91,23 @@ class UsersController < ApplicationController
             redirect_to :back, :flash => {:notice => "Remoção com sucesso!"}
         else
             redirect_to :back, :alert => "Problema ao cancelar amizade amizade."
+        end
+            
+    end
+    
+    def cancel_request
+        @user = User.find current_user.id
+        @friend = User.find User.decrypt(params[:friend_id])
+        
+        
+        @friendship2 = Friend.where("user_id = ?", @friend.id).where("friend_id = ?", @user.id).first
+        
+        
+        
+        if @friendship2.delete
+            redirect_to :back, :flash => {:notice => "Remoção com sucesso!"}
+        else
+           redirect_to :back, :alert => "Problema ao cancelar amizade amizade."
         end
             
     end
