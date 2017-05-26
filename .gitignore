@@ -23,7 +23,7 @@ db/*.sqlite3
 /db/*.sqlite3-journal
 /log/*
 /tmp/*
-/db/*
+#/db/*
 
 # add /config/database.yml if it contains passwords
 # /config/database.yml
