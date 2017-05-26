@@ -14,19 +14,19 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find User.decrypt params[:id]
+        @user = User.find User.decrypt(params[:id])
         
         
     end
     
     def add_friend
-        @user = current_user
+        @user = User.find current_user.id
         @friend = User.find User.decrypt params[:id]
         
         @friendship = Friend.new(user_id: @user.id, friend_id: @friend.id, status: 1)
         
         if @friendship.save!
-            redirect_to user_path(id: @friend.id), :flash => {:notice => "Solicitação feita com sucesso."}
+            redirect_to user_path(id: User.encrypt(@friend.id)), :flash => {:notice => "Solicitação feita com sucesso."}
         else
             redirect_to :back, :alert => "Problema ao solicitar amizade."
         end
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
         @friendship2 = Friend.where("user_id = ?", @friend.id).where("friend_id = ?", @user.id).first
         
         puts "@friendship1: #{@friendship1}"
-        
+        puts "@friendsship2 #{@friendship2}"
         
         
         if @friendship1.delete and @friendship2.delete
