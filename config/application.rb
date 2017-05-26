@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module RailsDevise
   class Application < Rails::Application
-
+    config.i18n.default_locale = :'pt-BR'
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: true,
