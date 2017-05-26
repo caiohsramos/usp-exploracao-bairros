@@ -8,8 +8,7 @@ Rails.application.routes.draw do
     
     post "/search/" => "search#index"
 
-    resources :neighborhoods
-    resources :userdata
+      resources :userdata
     resources :search
     resources :reviews
     
