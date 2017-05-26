@@ -7,4 +7,6 @@
 <% end %>
 <% if user_signed_in? %>
   <li><%= link_to 'Usuários', users_path %></li>
+  <li><%= link_to 'Notificações', user_notifications_path(user_id: User.encrypt(current_user.id)) %></li>
+  <li><%= link_to 'Amigos', friends_path %></li>
 <% end %>
