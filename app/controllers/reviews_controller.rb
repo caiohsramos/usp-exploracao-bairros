@@ -9,8 +9,11 @@ class ReviewsController < ApplicationController
         @review.place_id = session[:place_id]
         
         alreadyReviewd = nil
-        alreadyReviewd = Review.where("user_id = ?", current_user.id)
-        
+        alreadyReviewd = Review.where("user_id = ?", current_user.id).first
+        puts "alreadyReviewd"
+        puts alreadyReviewd.nil?
+        puts current_user.id
+        puts alreadyReviewd
         if alreadyReviewd.nil? and @review.save!
             redirect_to search_show_path, :flash => {notice => "Comentario adiciondo com sucesso."}
             
