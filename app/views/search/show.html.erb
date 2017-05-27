@@ -1,34 +1,34 @@
 <div>
-   <div class="row">
-   <div class="col-md-8">
-    <h2><%= @name %></h2>
+    <div class="row">
+        <div class="col-md-8">
+            <h2><%= @name %></h2>
 
-    <br>
+            <br>
 
-    <h4>Endereço: </h4>
-    <address><%= @formatted_address %></address>
+            <h4>Endereço: </h4>
+            <address><%= @formatted_address %></address>
 
-    <br>
+            <br>
 
-    <h4>Telefone: </h4>
-    <address><%= @formatted_number %></address>
+            <h4>Telefone:</h4>
+            <address><%= @formatted_number %></address>
 
-    <br>
+            <br>
 
-    <h4>Horário de Funcionamento:</h4>
-    <% @weekday_text.each do |day| %>
-        <address><%= day %></address>
-    <% end %>
+            <h4>Horário de Funcionamento:</h4>
+            <% @weekday_text.each do |day| %>
+                <address><%= day %></address>
+            <% end %>
 
 
-    <h4>Nota</h4>
-    <address><%= @stars.round(1) %> / 5.0</address>
-   </div>
+            <h4>Nota</h4>
+            <address><%= @stars.round(1) %> / 5.0</address>
+        </div>
     </div>
     <br>
 
     <h4>Mapa:</h4>
-    <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @formatted_address %>&size=640x640&markers=color:red|<%= @formatted_address %>&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM" class="img-thumbnail" >
+    <img src=<%= @map %> class="img-thumbnail">
 
     <br>
 
@@ -37,53 +37,49 @@
         <%= link_to 'Voltar', :back, class: 'btn btn-default' %>
     </p>
 
-  <% if user_signed_in? %>
-    <div class="authform">
-  <%= form_for @review do |f|  %>
-    <div class="form-group">
-      <%= f.label :comment %>
-      <%= f.text_field :comment, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :rate %>
-      <%= f.select(:rate, get_ratings, {:selected => nil}, {:class => 'form-control'}) %>
-    </div>
+    <% if user_signed_in? %>
+        <div class="authform">
+            <%= form_for @review do |f| %>
+                <div class="form-group">
+                    <%= f.label :comment %>
+                    <%= f.text_field :comment, class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                    <%= f.label :rate %>
+                    <%= f.select(:rate, get_ratings, {:selected => nil}, {:class => 'form-control'}) %>
+                </div>
 
-     <%= f.submit 'Add Comment', :class => 'button right' %>
-  <% end %>
-</div>
-<% end %>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Review</th>
-      <th>Nota</th>
-      <th> </th>
-      <th> </th>
-      <th colspan="5"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @reviews.each do |review| %>
-        <tr>
-        <td><%= review.comment %></td>
-        <td><%= review.rate %></td>
-        <% if review.user_id == current_user.id %>
-            <td><%= link_to 'Editar', #edit_userdatum_path(userdatum), 
-                class: 'btn btn-warning' %></td>
-        <% else %>
-            <td><%= link_to 'Apagar', #userdatum, method: :delete, data: { confirm: 'Você tem certeza?' }, 
-                class: 'btn btn-danger' %></td>
-
-        <% end %>
-
-        
-
-      </tr>
+                <%= f.submit 'Add Comment', :class => 'button right' %>
+            <% end %>
+        </div>
     <% end %>
-  </tbody>
-</table>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Review</th>
+            <th>Nota</th>
+            <th></th>
+            <th></th>
+            <th colspan="5"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @reviews.each do |review| %>
+            <tr>
+                <td><%= review.comment %></td>
+                <td><%= review.rate %></td>
+                <% if review.user_id == current_user.id %>
+                    <td><%= link_to 'Editar', #edit_userdatum_path(userdatum),
+                                    class: 'btn btn-warning' %></td>
+                <% else %>
+                    <td><%= link_to 'Apagar', #userdatum, method: :delete, data: { confirm: 'Você tem certeza?' },
+                                    class: 'btn btn-danger' %></td>
+                <% end %>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
 
 </div>

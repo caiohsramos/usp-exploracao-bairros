@@ -1,5 +1,7 @@
 class SearchController < ApplicationController
 
+    include GoogleApi
+
     def index
         session[:search] = params[:search] if params[:search]
         session[:radius] = params[:radius] if params[:radius]
@@ -9,22 +11,26 @@ class SearchController < ApplicationController
             redirect_to :back, alert: 'Preencha todos os campos' and return
         end
 
-        @results = GoogleApi.parse(search, radius)
+        @results = GoogleApi.nearby_search(search, radius)
         @dict = GoogleApi.dict
     end
 
     def show
         session[:place_id] = params[:place_id] if params[:place_id]
-        @place_id = session[:place_id]
-        url = URI.encode("https://maps.googleapis.com/maps/api/place/details/json?placeid=#{@place_id}&language=pt-BR&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
-        data = JSON.load(open(url))
-        result = data['result']
-        puts "result: #{result}"
+        place_id = session[:place_id]
+        result = GoogleApi.place_details(place_id)
+
         @name = result['name']
         @address_components = result['address_components']
         @formatted_address = result['formatted_address']
         @formatted_number = result['formatted_phone_number']
         opening_hours = result['opening_hours']
+        if opening_hours
+            @weekday_text = opening_hours['weekday_text']
+        else
+            @weekday_text = ['sem informação']
+        end
+        @map = GoogleApi.static_map(@formatted_address)
 
 
         @reviews = Review.where("place_id = ?", session[:place_id])
@@ -42,12 +48,5 @@ class SearchController < ApplicationController
         end
 
         @stars = @stars / count
-
-        if opening_hours
-            @weekday_text = opening_hours['weekday_text']
-        else
-            @weekday_text = ['sem informação']
-        end
-
     end
 end
