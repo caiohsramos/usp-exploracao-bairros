@@ -18,8 +18,12 @@ module GoogleApi
         data['result']
     end
 
+    def self.place_photos(photo_reference)
+        URI.encode("https://maps.googleapis.com/maps/api/place/photo?maxheight=360&photoreference=#{photo_reference}&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
+    end
+
     def self.static_map(formatted_address)
-        URI.encode("https://maps.googleapis.com/maps/api/staticmap?center=#{formatted_address}&size=640x640&markers=color:red|#{formatted_address}&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
+        URI.encode("https://maps.googleapis.com/maps/api/staticmap?center=#{formatted_address}&size=640x360&scale=2&markers=color:red|#{formatted_address}&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
     end
 
     def self.dict

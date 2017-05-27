@@ -31,6 +31,13 @@ class SearchController < ApplicationController
             @weekday_text = ['sem informação']
         end
         @map = GoogleApi.static_map(@formatted_address)
+        @photos = []
+        elements = result['photos']
+        if elements
+            elements.each do |element|
+                @photos << GoogleApi.place_photos(element['photo_reference'])
+            end
+        end
 
 
         @reviews = Review.where("place_id = ?", session[:place_id])
