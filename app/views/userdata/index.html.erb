@@ -2,16 +2,8 @@
     <h2>Painel do Usuário</h2>
 
     <br>
+    <%= render :partial => '/search/search' %>
 
-    <b>Faça uma busca:</b>
-    <%= form_tag search_index_path, method: :get, class: 'form-inline' do %>
-        <div class="form-group">
-            <%= text_field_tag :search, nil, placeholder: 'Onde você está? (ex: endereço, bairro, local, estabelecimento, etc...)', size: 55, class: 'form-control' %>
-
-            <%= text_field_tag :radius, nil, placeholder: 'Informe o raio de busca (em metros)', size: 30, class: 'form-control' %>
-        </div>
-        <%= button_to 'Buscar', nil, class: 'btn btn-primary' %>
-    <% end %>
 </div>
 
 <br>
