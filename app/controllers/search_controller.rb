@@ -11,14 +11,17 @@ class SearchController < ApplicationController
             redirect_to :back, alert: 'Preencha todos os campos' and return
         end
 
-        @results = GoogleApi.nearby_search(search, radius)
+        page_token = params[:page_token]
+        data = GoogleApi.nearby_search(search, radius, page_token)
+        @results = data['results']
+        @next_page_token = data['next_page_token']
         @dict = GoogleApi.dict
     end
 
     def show
         session[:place_id] = params[:place_id] if params[:place_id]
-        place_id = session[:place_id]
-        result = GoogleApi.place_details(place_id)
+        @place_id = session[:place_id]
+        result = GoogleApi.place_details(@place_id)
 
         @name = result['name']
         @address_components = result['address_components']

@@ -1,28 +1,28 @@
 <%= form_for(userdatum) do |f| %>
-  <% if userdatum.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(userdatum.errors.count, "error") %> prohibited this userdatum from being saved:</h2>
+    <% if userdatum.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(userdatum.errors.count, "error") %> prohibited this userdatum from being saved:</h2>
 
-      <ul>
-      <% userdatum.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+            <ul>
+                <% userdatum.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
+    <div class="field">
+        <%= f.label :comment %>
+        <%= f.text_field :comment, class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :comment %>
-    <%= f.text_field :comment, class: "form-control" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit label, class: "btn btn-primary" %>
-  </div>
+    <div class="actions">
+        <%= f.submit label, class: "btn btn-primary" %>
+    </div>
 
 <% end %>
