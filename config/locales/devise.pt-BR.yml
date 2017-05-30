@@ -63,3 +63,22 @@ pt-BR:
       not_saved:
         one: "1 erro impediu a gravação de %{resource} :"
         other: "%{count} erros impediram a gravação de %{resource} :"
+
+  activerecord:
+    attributes:
+      user:
+        name: "Nome"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              invalid: "inválido"
+            password:
+              too_short: "muito curta"
+              blank: "não pode estar em branco"
+            password_confirmation:
+              confirmation: "não corresponde"
+

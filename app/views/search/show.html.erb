@@ -63,9 +63,6 @@
         </div>
     </div>
 
-
-
-
     <% if user_signed_in? %>
         <div class="authform">
             <%= form_for @review do |f| %>
@@ -99,6 +96,7 @@
             <tr>
                 <td><%= review.comment %></td>
                 <td><%= review.rate %></td>
+
                 <% if review.user_id == current_user.id %>
                     <td><%= link_to 'Editar', #edit_userdatum_path(userdatum),
                                     class: 'btn btn-warning' %></td>

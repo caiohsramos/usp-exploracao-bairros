@@ -9,7 +9,7 @@ class UsersController < ApplicationController
         @user = User.find User.decrypt params[:id]
 
         unless @user == current_user
-            redirect_to :back, :alert => "Access denied."
+            redirect_to :back, :alert => "Acesso proibido."
         end
     end
 
