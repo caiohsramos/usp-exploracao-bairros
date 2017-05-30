@@ -70,6 +70,7 @@ pt-BR:
         name: "Nome"
         password: "Senha"
         password_confirmation: "Confirmação de senha"
+        current_password: "Senha atual"
     errors:
       models:
         user:
@@ -81,4 +82,6 @@ pt-BR:
               blank: "não pode estar em branco"
             password_confirmation:
               confirmation: "não corresponde"
+            current_password:
+              blank: "não pode estar em branco"
 

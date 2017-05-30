@@ -5,7 +5,6 @@ class UserdataController < ApplicationController
     # GET /userdata
     # GET /userdata.json
     def index
-        #session[:user_id] = params[:user_id] if params[:user_id]
         @userdata = Userdatum.where(:user_id => current_user)
     end
 
@@ -30,8 +29,6 @@ class UserdataController < ApplicationController
     def create
         @userdatum = Userdatum.new(userdatum_params)
         @userdatum.place_id = session[:place_id]
-
-        puts "place_id2: #{@userdatum.place_id}"
         @userdatum.user = current_user
 
         respond_to do |format|
