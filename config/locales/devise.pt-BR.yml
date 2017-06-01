@@ -71,6 +71,12 @@ pt-BR:
         password: "Senha"
         password_confirmation: "Confirmação de senha"
         current_password: "Senha atual"
+      userdatum:
+        name: "Nome"
+        comment: "Comentário Privado"
+      review:
+        comment: "Comentário Público"
+        rate: "Nota"
     errors:
       models:
         user:
@@ -84,4 +90,3 @@ pt-BR:
               confirmation: "não corresponde"
             current_password:
               blank: "não pode estar em branco"
-
