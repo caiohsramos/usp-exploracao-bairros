@@ -24,7 +24,7 @@
 
             <td>
                 <% result['types'].each do |type| %>
-                    <span class='label label-info'><%= @dict[type.to_sym] %></span>
+                    <span class='label label-info'><%= t type %></span>
                 <% end %>
 
                 <% if result['opening_hours'] != nil %>
