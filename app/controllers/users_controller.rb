@@ -82,9 +82,7 @@ class UsersController < ApplicationController
         
         @friendship1 = Friend.where("user_id = ?", @user.id).where("friend_id = ?", @friend.id).first
         @friendship2 = Friend.where("user_id = ?", @friend.id).where("friend_id = ?", @user.id).first
-        
-        puts "@friendship1: #{@friendship1}"
-        puts "@friendsship2 #{@friendship2}"
+
         
         
         if @friendship1.delete and @friendship2.delete
