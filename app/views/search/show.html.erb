@@ -98,10 +98,9 @@
                 <td><%= review.rate %></td>
 
                 <% if review.user_id == current_user.id %>
-                    <td><%= link_to 'Editar', #edit_userdatum_path(userdatum),
+                    <td><%= link_to 'Editar', edit_review_path(review),
                                     class: 'btn btn-warning' %></td>
-                <% else %>
-                    <td><%= link_to 'Apagar', #userdatum, method: :delete, data: { confirm: 'Você tem certeza?' },
+                    <td><%= link_to 'Apagar', review, method: :delete, data: { confirm: 'Você tem certeza?' },
                                     class: 'btn btn-danger' %></td>
                 <% end %>
             </tr>
