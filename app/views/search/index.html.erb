@@ -2,27 +2,46 @@
 
 <table class="table table-hover">
     <thead>
-        <tr>
-            <th>Nome do local</th>
-            <th>Tipo</th>
-        </tr>
+    <tr>
+        <th colspan="1"></th>
+        <th>Nome e endereço do local</th>
+        <th>Tipo</th>
+    </tr>
     </thead>
-    <tbody>
-        <% @results.each do |result| %>
-            <tr>
-                <td><%=result['name'] %></td>
-                <td>
-                    <% result['types'].each do |type| %>
-                        <span class='label label-info'><%= @dict[type.to_sym] %></span>
-                    <% end %>
 
-                    <% if result['opening_hours'] != nil %>
-                        <span class='label label-success'><%= 'aberto agora' if result['opening_hours']['open_now'] %></span>
-                    <% end %>
-                </td>
-                <td><td><%= link_to 'Mostrar', search_show_path(:place_id => result['place_id']), class: 'btn btn-success' %></td></td>
-            </tr>
-        <% end %>
+    <tbody>
+    <% @results.each do |result| %>
+        <tr>
+            <td>
+                <img src=<%= result['icon'] %> height="30" width="30">
+            </td>
+
+            <td>
+                <b><%= result['name'] %></b>
+                <br>
+                <%= result['vicinity'] %>
+            </td>
+
+            <td>
+                <% result['types'].each do |type| %>
+                    <span class='label label-info'><%= t type %></span>
+                <% end %>
+
+                <% if result['opening_hours'] != nil %>
+                    <span class='label label-success'><%= 'aberto agora' if result['opening_hours']['open_now'] %></span>
+                <% end %>
+            </td>
+
+            <td><%= link_to 'Detalhes', search_show_path(:place_id => result['place_id']), class: 'btn btn-success' %></td>
+        </tr>
+    <% end %>
     </tbody>
 </table>
+
+<tr>
+    <%= link_to 'Voltar', :back, class: 'btn btn-default' %>
+    <% if @next_page_token %>
+        <%= link_to 'Próxima Página', search_index_path(:page_token => @next_page_token), class: 'btn btn-primary' %>
+    <% end %>
+</tr>
 

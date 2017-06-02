@@ -1,13 +1,19 @@
 describe User do
 
-  before(:each) { @user = User.new(email: 'user@example.com') }
+    #before(:each) {@user = User.new(email: 'user@example.com')}
 
-  subject { @user }
+    #subject {@user}
 
-  it { should respond_to(:email) }
+    #it {should respond_to(:email)}
 
-  it "#email returns a string" do
-    expect(@user.email).to match 'user@example.com'
-  end
+    it 'check email consistency' do
+        user = User.new(email: 'user@example.com')
+        expect(user.email).to match 'user@example.com'
+    end
+
+    it 'check name consistency' do
+        user = User.new(name: 'MyName')
+        expect(user.name).to match 'MyName'
+    end
 
 end

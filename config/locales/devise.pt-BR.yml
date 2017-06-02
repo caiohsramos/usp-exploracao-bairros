@@ -1,0 +1,224 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+
+# Utilize-o em 'config/locales/', com o nome de 'devise.pt-BR.yml'.
+# Em 'config/application.rb', utilize => config.i18n.default_locale = :'pt-BR'
+
+pt-BR:
+  devise:
+    confirmations:
+      confirmed: "Sua conta foi confirmada com sucesso."
+      send_instructions: "Você receberá um e-mail para confirmar sua conta em alguns minutos."
+      send_paranoid_instructions: "Caso seu endereço de e-mail já exista em nosso banco de dados, você receberá um email com instruções sobre como ativar sua conta."
+    failure:
+      already_authenticated: "Você já está logado."
+      inactive: "Sua conta ainda não foi ativada."
+      invalid: "Email ou senha inválidos."
+      locked: "Sua conta está bloqueada."
+      last_attempt: "Você possui apenas uma tentativa, antes de sua conta ser bloqueada."
+      not_found_in_database: "Email ou senha inválidos."
+      timeout: "Sua sessão expirou, faça login novamente para continuar."
+      unauthenticated: "Você precisa fazer login ou se registrar, antes de continuar."
+      unconfirmed: "Você precisa confirmar sua conta, antes de continuar."
+    mailer:
+      confirmation_instructions:
+        subject: "Instruções de confirmação"
+      reset_password_instructions:
+        subject: "Instruções para redefinir sua senha"
+      unlock_instructions:
+        subject: "Instruções para desbloquear sua conta"
+      password_change:
+        subject: "Senha modificada"
+    omniauth_callbacks:
+      failure: "Não foi possível autenticá-lo em %{kind} por causa de \"%{reason}\"."
+      success: "Autenticado com sucesso em %{kind}."
+    passwords:
+      no_token: "Você não pode acessar essa página para redefinir sua senha. Se você recebeu um e-mail para redefinir sua senha, por favor, certifique-se de estar usando a URL correta."
+      send_instructions: "Você receberá um e-mail com instruções sobre como redefinir sua senha em poucos minutos."
+      send_paranoid_instructions: "Se o seu endereço de e-mail existir em nosso banco de dados, você receberá um link de recuperação de senha em poucos minutos."
+      updated: "Sua senha foi alterada com sucesso. Você agora está conectado."
+      updated_not_active: "Sua senha foi alterada com sucesso."
+    registrations:
+      destroyed: "Até logo! Sua conta foi cancelada com sucesso. Nós esperamos vê-lo novamente em breve."
+      signed_up: "Bem-vindo! Você se registrou com sucesso."
+      signed_up_but_inactive: "Você se registrou com sucesso. Para efetuar login, você deverá ativar sua conta."
+      signed_up_but_locked: "Você se registrou com sucesso. No entanto, não podemos logá-lo, pois sua conta está bloqueada."
+      signed_up_but_unconfirmed: "Uma mensagem com um link de confirmação foi enviado para seu endereço de e-mail. Por favor, verifique-o, para ativar sua conta."
+      update_needs_confirmation: "Você atualizou sua conta com sucesso, mas precisamos verificar o seu novo endereço de e-mail. Por favor, verifique seu e-mail e clique no link de confirmação para confirmar o seu novo endereço de e-mail."
+      updated: "Sua conta foi atualizada com sucesso."
+    sessions:
+      signed_in: "Logado com sucesso."
+      signed_out: "Saiu com sucesso."
+      already_signed_out: "Saiu com sucesso."
+    unlocks:
+      send_instructions: "Você receberá um e-mail com instruções sobre como desbloquear sua conta, em poucos minutos."
+      send_paranoid_instructions: "Se a sua conta existir, você receberá um e-mail com instruções sobre como desbloqueá-la, em poucos minutos."
+      unlocked: "Sua conta foi desbloqueada com sucesso. Faça login para continuar."
+  errors:
+    messages:
+      already_confirmed: "já foi confirmado, por favor, efetue login"
+      confirmation_period_expired: "deve ser confirmada dentro de %{period}, por favor solicite uma nova"
+      expired: "expirado, por favor solicite uma nova"
+      not_found: "não encontrado"
+      not_locked: "não encontra-se bloqueada"
+      not_saved:
+        one: "1 erro impediu a gravação de %{resource} :"
+        other: "%{count} erros impediram a gravação de %{resource} :"
+
+  activerecord:
+    attributes:
+      user:
+        name: "Nome"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        current_password: "Senha atual"
+      userdatum:
+        name: "Nome"
+        comment: "Comentário Privado"
+      review:
+        comment: "Comentário Público"
+        rate: "Nota"
+
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              invalid: "inválido"
+            password:
+              too_short: "muito curta"
+              blank: "não pode estar em branco"
+            password_confirmation:
+              confirmation: "não corresponde"
+            current_password:
+              blank: "não pode estar em branco"
+
+  accounting: 'contabilidade'
+  administrative_area_level_1: 'estado'
+  administrative_area_level_2: 'cidade'
+  administrative_area_level_3: ''
+  administrative_area_level_4: 'bairro'
+  administrative_area_level_5: ''
+  airport: 'aeroporto'
+  amusement_park: 'parque de diversões'
+  aquarium: 'aquário'
+  art_gallery: 'galeria de arte'
+  atm: 'caixa eletrônico'
+  bakery: 'padaria'
+  bank: 'banco'
+  bar: 'bar'
+  beauty_salon: 'salão de beleza'
+  bicycle_store: 'loja de bicicletas'
+  book_store: 'livraria'
+  bowling_alley: 'boliche'
+  bus_station: 'rodoviária'
+  cafe: 'lanchonete'
+  campground: 'local de acampamento'
+  car_dealer: 'revenda de automóveis'
+  car_rental: 'locação de automóveis'
+  car_repair: 'oficina mecânica'
+  car_wash: 'lava-jato'
+  casino: 'cassino'
+  cemetery: 'cemitério'
+  church: 'igreja'
+  city_hall: 'prefeitura'
+  clothing_store: 'loja de roupas'
+  colloquial_area: 'entidade'
+  convenience_store: 'loja de conveniência'
+  country: 'país'
+  courthouse: 'tribunal'
+  dentist: 'dentista'
+  department_store: 'loja de departamento'
+  doctor: 'médico'
+  electrician: 'eletricista'
+  electronics_store: 'loja de eletrônicos'
+  embassy: 'embaixada'
+  establishment: 'estabelecimento'
+  finance: 'finança'
+  fire_station: 'bombeiros'
+  floor: 'andar'
+  florist: 'florista'
+  food: 'alimentação'
+  funeral_home: 'casa funerária'
+  furniture_store: 'loja de móveis'
+  gas_station: 'posto de gasolina'
+  general_contractor: 'empreiteiro geral'
+  geocode: 'código geográfico'
+  grocery_or_supermarket: 'supermercado'
+  gym: 'academia'
+  hair_care: 'cabeleireiro'
+  hardware_store: 'loja de material de construção'
+  health: 'saúde'
+  hingu_temple: 'templo hindú'
+  home_goods_store: 'loja de artigos para o lar'
+  hospital: 'hospital'
+  insurance_agency: 'agência de seguros'
+  intersection: 'intersecção'
+  jewelry_store: 'joalheria'
+  laundry: 'lavanderia'
+  lawyer: 'advogacia'
+  library: 'biblioteca'
+  liquor_store: 'loja de bebidas alcoólicas'
+  local_goverment_office: 'escritório do governo local'
+  locality: 'entidade política de cidade ou município'
+  locksmith: 'chaveiro'
+  lodging: 'pousada'
+  meal_delivery: 'entrega de refeições'
+  meal_takeaway: 'refeição para viagem'
+  mosque: 'mesquita'
+  movie_rental: 'locadora de filmes'
+  movie_theater: 'cinema'
+  moving_company: 'empresa de mudanças'
+  museum: 'museu'
+  natural_feature: 'característica natural proeminente'
+  neighborhood: 'vizinhança'
+  night_club: 'casa noturna'
+  painter: 'pintor'
+  park: 'parque'
+  parking: 'estacionamento'
+  pet_store: 'loja de animais'
+  pharmacy: 'farmácia'
+  physiotherapist: 'fisioterapeuta'
+  place_of_worship: 'local de culto'
+  plumber: 'encanador'
+  point_of_interest: 'ponto de interesse'
+  police: 'departamento de polícia'
+  political: 'entidade política'
+  post_box: 'caixa de correio'
+  post_office: 'agência de correio'
+  postal_code: 'código postal'
+  postal_code_prefix: 'prefixo de código postal'
+  postal_code_suffix: 'sufixo de código postal'
+  postal_town: 'agrupamento de áreas geográficas'
+  premise: 'entidade dentro de outra'
+  real_estate_agency: 'agência imobiliária'
+  restaurant: 'restaurante'
+  roofing_contractor: 'contratante de telhados'
+  room: 'sala'
+  route: 'rota'
+  rv_park: 'parque de estacionamento'
+  school: 'escola'
+  shoe_store: 'loja de calçados'
+  shopping_mall: 'centro de compras'
+  spa: 'fonte de água mineral'
+  stadium: 'estádio'
+  storage: 'armazém'
+  store: 'loja'
+  street_address: 'endereço de rua'
+  street_number: 'número da rua'
+  sublocality: 'sub-entidade política de cidade ou município'
+  sublocality_level_4: 'sub-entidade política de cidade ou município'
+  sublocality_level_5: 'sub-entidade política de cidade ou município'
+  sublocality_level_3: 'sub-entidade política de cidade ou município'
+  sublocality_level_2: 'sub-entidade política de cidade ou município'
+  sublocality_level_1: 'sub-entidade política de cidade ou município'
+  subpremise: 'entidade dentro de outra entidade dentro de outra'
+  subway_station: 'estação de metrô'
+  synagogue: 'sinagoga'
+  taxi_stand: 'ponto de táxi'
+  train_station: 'estação de trem'
+  transit_station: 'estação de trânsito'
+  travel_agency: 'agência de viagens'
+  university: 'universidade'
+  veterinary_care: 'veterinário'
+  ward: 'enfermaria'
+  zoo: 'zoológico'
