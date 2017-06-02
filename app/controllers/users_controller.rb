@@ -6,16 +6,15 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find User.decrypt params[:id]
-
-        unless @user == current_user
-            redirect_to :back, :alert => "Acesso proibido."
-        end
-    end
-
-    def show
         @user = User.find User.decrypt(params[:id])
-
+        @userdata = Userdatum.where(:user_id => current_user)
+        @reviews = Review.where("user_id = ?", current_user)
+        @friends = Friend.where("user_id = ?", @user.id).where("status = ?", 2)
+        
+        puts "Reviews: #{@reviews}"
+        @reviews.each do |r|
+            puts "r: #{r}"
+        end
 
     end
 
