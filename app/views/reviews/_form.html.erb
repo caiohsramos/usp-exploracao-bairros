@@ -17,10 +17,10 @@
   </div>
   <div class="form-group">
       <%= f.label :rate %>
-      <%= f.select(:rate, get_ratings, {:selected => nil}, {:class => 'form-control'}) %>
+      <%= f.select(:rate, get_ratings, {:selected => @review.rate}, {:class => 'form-control'}) %>
   </div>
 
   <div class="actions">
-    <%= f.submit class: "btn btn-primary"%>
+    <%= f.submit label, class: "btn btn-primary"%>
   </div>
 <% end %>
