@@ -15,7 +15,6 @@ class SearchController < ApplicationController
         data = GoogleApi.nearby_search(search, radius, page_token)
         @results = data['results']
         @next_page_token = data['next_page_token']
-        @dict = GoogleApi.dict
     end
 
     def show
