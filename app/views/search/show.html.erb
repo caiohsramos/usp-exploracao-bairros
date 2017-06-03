@@ -64,25 +64,15 @@
 
 <% if user_signed_in? %>
     <div class="authform">
-        <%= form_for @review do |f| %>
-            <div class="form-group">
-                <%= f.label :comment %>
-                <%= f.text_field :comment, class: 'form-control' %>
-            </div>
-            <div class="form-group">
-                <%= f.label :rate %>
-                <%= f.select(:rate, get_ratings, {:selected => nil}, {:class => 'form-control'}) %>
-            </div>
-
-            <%= f.submit 'Adicionar comentário público', :class => 'button right' %>
-        <% end %>
+        <%= render :partial => 'reviews/form' %>
     </div>
 <% end %>
 
 <table class="table table-hover">
     <thead>
     <tr>
-        <th>Review</th>
+        <th>Usuário</th>
+        <th>Comentário Público</th>
         <th>Nota</th>
         <th></th>
         <th></th>
@@ -92,12 +82,15 @@
     <tbody>
     <% @reviews.each do |review| %>
         <tr>
+            <td><%= link_to User.find(review.user_id).name, user_path(id: User.encrypt(review.user_id)) %></td>
             <td><%= review.comment %></td>
             <td><%= review.rate %></td>
 
             <% if current_user != nil && review.user_id == current_user.id %>
-                <td><%= link_to 'Editar', edit_review_path(review), class: 'btn btn-warning' %></td>
-                <td><%= link_to 'Apagar', review, method: :delete, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger' %></td>
+                <td>
+                    <%= link_to 'Editar', edit_review_path(review), class: 'btn btn-warning' %>
+                    <%= link_to 'Apagar', review, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
+                </td>
             <% end %>
         </tr>
     <% end %>

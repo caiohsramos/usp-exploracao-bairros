@@ -91,6 +91,10 @@ pt-BR:
               confirmation: "não corresponde"
             current_password:
               blank: "não pode estar em branco"
+  helpers:
+    submit:
+      create: "Adicionar"
+      update: "Atualizar"
 
   accounting: 'contabilidade'
   administrative_area_level_1: 'estado'

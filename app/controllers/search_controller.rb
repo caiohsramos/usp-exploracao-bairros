@@ -1,7 +1,5 @@
 class SearchController < ApplicationController
 
-    include GoogleApi
-
     def index
         session[:search] = params[:search] if params[:search]
         session[:radius] = params[:radius] if params[:radius]
@@ -40,7 +38,6 @@ class SearchController < ApplicationController
                 @photos << GoogleApi.place_photos(element['photo_reference'])
             end
         end
-
 
         @reviews = Review.where("place_id = ?", session[:place_id])
         @review = Review.new

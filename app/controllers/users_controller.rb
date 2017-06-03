@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find User.decrypt(params[:id])
-        @userdata = Userdatum.where(:user_id => current_user)
-        @reviews = Review.where("user_id = ?", current_user)
+        @userdata = Userdatum.where(:user_id => @user.id)
+        @reviews = Review.where("user_id = ?", @user.id)
         @friends = Friend.where("user_id = ?", @user.id).where("status = ?", 2)
 
         puts "Reviews: #{@reviews}"
