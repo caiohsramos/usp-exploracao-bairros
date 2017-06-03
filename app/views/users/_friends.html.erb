@@ -10,7 +10,10 @@
     <% @friends.each do |friend| %>
         <tr>
             <td><%= link_to User.find(friend.friend_id).name, user_path(id: User.encrypt(friend.friend_id)) %></td>
-            <td><%= link_to 'Cancelar amizade', cancel_friend_path(friend_id: User.encrypt(friend.friend_id)), method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %></td>
+
+            <% if @user == current_user %>
+                <td><%= link_to 'Cancelar amizade', cancel_friend_path(friend_id: User.encrypt(friend.friend_id)), method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %></td>
+            <% end %>
         </tr>
     <% end %>
     </tbody>

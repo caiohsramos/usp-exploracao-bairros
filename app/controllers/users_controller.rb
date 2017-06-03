@@ -10,6 +10,8 @@ class UsersController < ApplicationController
         @userdata = Userdatum.where(:user_id => @user.id)
         @reviews = Review.where("user_id = ?", @user.id)
         @friends = Friend.where("user_id = ?", @user.id).where("status = ?", 2)
+        @gravatar = "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(@user.email)}?s=150"
+
 
         puts "Reviews: #{@reviews}"
         @reviews.each do |r|

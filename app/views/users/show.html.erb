@@ -1,14 +1,21 @@
 <h3>Perfil Público</h3>
-<div class="row">
-    <div class="col-md-6">
-        <p>Nome: <%= @user.name if @user.name %></p>
-        <p>Email: <%= @user.email if @user.email %></p>
-    </div>
-    <div class="col-md-1">
-        <%= link_to "Adicionar amigo", add_friend_path, {class: "btn btn-default"} %>
+<div class="container" style="background-color: whitesmoke">
+    <div class="row">
+        <div class="col-md-3">
+            <p><img src=<%= @gravatar %>></p>
+        </div>
+
+        <div class="col-md-9" >
+                <br>
+                <h2><%= @user.name if @user.name %></h2>
+                <h5><%= @user.email if @user.email %></h5>
+                <h5><%= link_to "Adicionar amigo", add_friend_path, {class: "btn btn-default"} %></h5>
+        </div>
     </div>
 </div>
 
+
+<br>
 
 <div class="container" style="background-color: whitesmoke">
     <%= render :partial => 'userdata/userdata_list' %>
