@@ -6,8 +6,8 @@ before_script:
   - which ruby
   - gem install bundler --no-ri --no-rdoc
   - bundle install --jobs $(nproc) "${FLAGS[@]}"
-  - echo domain: "example.com">config/application.yml
-  - rake db:migrate
+  - cd config
+  - echo domain: "example.com" > application.yml
 
 rspec:
   script:
