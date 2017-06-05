@@ -42,17 +42,10 @@ class SearchController < ApplicationController
         @reviews = Review.where("place_id = ?", session[:place_id])
         @review = Review.new
         @stars = 0.0
-        count = 0
+        @count = @reviews.count
 
         @reviews.each do |review|
             @stars = @stars + review.rate
-            count = count + 1
         end
-
-        if (count == 0)
-            count = 1
-        end
-
-        @stars = @stars / count
     end
 end

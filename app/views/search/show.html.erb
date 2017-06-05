@@ -23,7 +23,11 @@
         <% end %>
 
         <h4>Nota</h4>
-        <address><%= @stars.round(1) %> / 5.0</address>
+        <% if @count == 0 %>
+            <address>Sem Nota</address>
+        <% else %>
+            <address><%= @stars.round(1)/@count %> / 5.0</address>
+        <% end %>
     </div>
 
     <div class="col-md-8">
@@ -74,9 +78,7 @@
         <th>Usuário</th>
         <th>Comentário Público</th>
         <th>Nota</th>
-        <th></th>
-        <th></th>
-        <th colspan="5"></th>
+        <th colspan="4"></th>
     </tr>
     </thead>
     <tbody>
@@ -91,6 +93,8 @@
                     <%= link_to 'Editar', edit_review_path(review), class: 'btn btn-warning' %>
                     <%= link_to 'Apagar', review, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
                 </td>
+            <% else %>
+                <th colspan="4"></th>
             <% end %>
         </tr>
     <% end %>
