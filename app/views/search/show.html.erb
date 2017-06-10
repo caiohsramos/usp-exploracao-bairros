@@ -26,7 +26,7 @@
         <% if @count == 0 %>
             <address>Sem Nota</address>
         <% else %>
-            <address><%= @stars.round(1)/@count %> / 5.0</address>
+            <address><%= (@stars/@count).round(1) %> / 5.0</address>
         <% end %>
     </div>
 
@@ -66,40 +66,58 @@
     </div>
 </div>
 
-<% if user_signed_in? %>
-    <div class="authform">
-        <%= render :partial => 'reviews/form' %>
-    </div>
-<% end %>
+<br>
 
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th>Usuário</th>
-        <th>Comentário Público</th>
-        <th>Nota</th>
-        <th colspan="4"></th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @reviews.each do |review| %>
-        <% if User.exists?(review.user_id) %>
-        <tr>
-            <td><%= link_to User.find(review.user_id).name, user_path(id: User.encrypt(review.user_id)) %></td>
-            <td><%= review.comment %></td>
-            <td><%= review.rate %></td>
+<div class="row container">
 
-            <% if current_user != nil && review.user_id == current_user.id %>
-                <td>
-                    <%= link_to 'Editar', edit_review_path(review), class: 'btn btn-warning' %>
-                    <%= link_to 'Apagar', review, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
-                </td>
-            <% else %>
-                <th colspan="4"></th>
-            <% end %>
-        </tr>
+    <div class="col-md-4">
+        <% if user_signed_in? %>
+            <%= render :partial => 'reviews/form' %>
         <% end %>
-    <% end %>
-    </tbody>
-</table>
+    </div>
+
+    <div class="col-md-8" style="background-color: whitesmoke">
+        <table class="table table-hover">
+            <thead>
+            <th>
+                <h4>Comentários:</h4>
+            </th>
+            <th colspan="2"></th>
+            </thead>
+
+            <tbody>
+            <% @reviews.each do |review| %>
+                <% if User.exists?(review.user_id) %>
+                    <tr>
+                        <td>
+                            <h5>
+                                <%= link_to User.find(review.user_id).name, user_path(id: User.encrypt(review.user_id)) %>
+                                <br>
+                                <small><%= review.updated_at %></small>
+                            </h5>
+
+                            <%= review.comment %>
+                        </td>
+                        <td>
+                            <b>Nota</b>
+                            <h3><%= review.rate %></h3>
+                        </td>
+
+                        <% if current_user != nil && review.user_id == current_user.id %>
+                            <td>
+                                <%= link_to 'Editar', edit_review_path(review), class: 'btn btn-warning' %>
+                                <%= link_to 'Apagar', review, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
+                            </td>
+                        <% else %>
+                            <th colspan="4"></th>
+                        <% end %>
+                    </tr>
+                <% end %>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 
