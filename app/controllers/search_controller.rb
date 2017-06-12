@@ -21,31 +21,44 @@ class SearchController < ApplicationController
         result = GoogleApi.place_details(@place_id)
 
         @name = result['name']
-        @address_components = result['address_components']
-        @formatted_address = result['formatted_address']
         @formatted_number = result['formatted_phone_number']
-        opening_hours = result['opening_hours']
-        if opening_hours
-            @weekday_text = opening_hours['weekday_text']
-        else
-            @weekday_text = ['sem informação']
-        end
+        @formatted_address = result['formatted_address']
         @map = GoogleApi.static_map(@formatted_address)
-        @photos = []
-        elements = result['photos']
-        if elements
-            elements.each do |element|
-                @photos << GoogleApi.place_photos(element['photo_reference'])
-            end
-        end
+        @weekday_text = get_weekday_text(result['opening_hours'])
+        @photos = get_photos(result['photos'])
 
         @reviews = Review.where("place_id = ?", session[:place_id])
         @review = Review.new
-        @stars = 0.0
         @count = @reviews.count
+        @stars = get_stars(@reviews)
+    end
 
-        @reviews.each do |review|
-            @stars = @stars + review.rate
+    private
+
+    def get_weekday_text(opening_hours)
+        if opening_hours
+            weekday_text = opening_hours['weekday_text']
+        else
+            weekday_text = ['sem informação']
         end
+        return weekday_text
+    end
+
+    def get_photos(elements)
+        photos = []
+        if elements
+            elements.each do |element|
+                photos << GoogleApi.place_photos(element['photo_reference'])
+            end
+        end
+        return photos
+    end
+
+    def get_stars(reviews)
+        stars = 0.0
+        reviews.each do |review|
+            stars = stars + review.rate
+        end
+        return stars
     end
 end
