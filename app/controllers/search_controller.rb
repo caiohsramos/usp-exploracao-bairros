@@ -10,20 +10,22 @@ class SearchController < ApplicationController
         end
 
         page_token = params[:page_token]
-        data = GoogleApi.nearby_search(search, radius, page_token)
+        results = GoogleApi.text_search(search)
+        data = GoogleApi.nearby_search(results, radius, page_token)
         @results = data['results']
         @next_page_token = data['next_page_token']
+        @origin_id = results['place_id']
     end
 
     def show
         session[:place_id] = params[:place_id] if params[:place_id]
         @place_id = session[:place_id]
+        @origin_id = params[:origin_id]
         result = GoogleApi.place_details(@place_id)
-
         @name = result['name']
         @formatted_number = result['formatted_phone_number']
         @formatted_address = result['formatted_address']
-        @map = GoogleApi.static_map(@formatted_address)
+        @map = GoogleApi.get_map(@origin_id, @place_id)
         @weekday_text = get_weekday_text(result['opening_hours'])
         @photos = get_photos(result['photos'])
 

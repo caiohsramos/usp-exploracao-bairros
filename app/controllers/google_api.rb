@@ -1,26 +1,62 @@
 module GoogleApi
 
-    def self.nearby_search(search, radius, page_token="")
-        url = URI.encode("https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{search}&radius=#{radius}&language=pt-BR&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
+    # Google Place Search API
+    def self.text_search(search)
+        url = URI.encode("https://maps.googleapis.com/maps/api/place/textsearch/json?query=#{search}&language=pt-BR&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
         data = JSON.load(open(url))
-        results = data['results']
-        lat = results[0]['geometry']['location']['lat']
-        lng = results[0]['geometry']['location']['lng']
+        data['results'][0]
+    end
+
+    def self.nearby_search(results, radius, page_token="")
+        lat = results['geometry']['location']['lat']
+        lng = results['geometry']['location']['lng']
         url = URI.encode("https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=#{page_token}&location=#{lat},#{lng}&radius=#{radius}&type=all&language=pt-BR&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
         JSON.load(open(url))
     end
 
+
+    # Google Place Details API
     def self.place_details(place_id)
         url = URI.encode("https://maps.googleapis.com/maps/api/place/details/json?placeid=#{place_id}&language=pt-BR&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
         data = JSON.load(open(url))
         data['result']
     end
 
+    def self.get_coordinates(place_id)
+        coordinates = {}
+        coordinates['lat'] = place_details(place_id)['geometry']['location']['lat']
+        coordinates['lng'] = place_details(place_id)['geometry']['location']['lng']
+        return coordinates
+    end
+
+
+    # Google Place Photos API
     def self.place_photos(photo_reference)
         URI.encode("https://maps.googleapis.com/maps/api/place/photo?maxheight=480&photoreference=#{photo_reference}&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
     end
 
-    def self.static_map(formatted_address)
-        URI.encode("https://maps.googleapis.com/maps/api/staticmap?center=#{formatted_address}&size=640x480&scale=1&markers=color:red|#{formatted_address}&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
+
+    # Google Static Map API
+    def self.static_map(coordinates, polyline_data = "")
+        URI.encode("https://maps.googleapis.com/maps/api/staticmap?center=#{coordinates['lat']},#{coordinates['lng']}&size=640x480&path=enc:#{polyline_data}&scale=1&markers=color:red|#{coordinates['lat']},#{coordinates['lng']}&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
+    end
+
+    def self.get_map(origin_id, destination_id)
+        if not origin_id
+            polyline = directions(destination_id, destination_id)
+        else
+            polyline = directions(origin_id, destination_id)
+        end
+        coordinates = get_coordinates(destination_id)
+        static_map(coordinates, polyline)
+    end
+
+
+    # Google Directions API
+    def self.directions(origin_id, destination_id)
+        url = URI.encode("https://maps.googleapis.com/maps/api/directions/json?origin=place_id:#{origin_id}&destination=place_id:#{destination_id}&mode=walking&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
+        print(url)
+        data = JSON.load(open(url))
+        data['routes'][0]['overview_polyline']['points']
     end
 end

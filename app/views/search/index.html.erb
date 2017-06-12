@@ -32,7 +32,7 @@
                 <% end %>
             </td>
 
-            <td><%= link_to 'Detalhes', search_show_path(:place_id => result['place_id']), class: 'btn btn-success' %></td>
+            <td><%= link_to 'Detalhes', search_show_path(:origin_id => @origin_id, :place_id => result['place_id']), class: 'btn btn-success' %></td>
         </tr>
     <% end %>
     </tbody>
