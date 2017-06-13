@@ -6,6 +6,8 @@ class UserdataController < ApplicationController
     # GET /userdata.json
     def index
         @userdata = Userdatum.where(:user_id => current_user)
+        @reviews = Review.where("user_id = ?", current_user.id)
+        @friends = Friend.where("user_id = ?", current_user.id).where("status = ?", 2)
     end
 
     # GET /userdata/1

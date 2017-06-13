@@ -1,54 +1,28 @@
 <h3>Perfil Público</h3>
 
-<div class="container" style="background-color: whitesmoke">
-    <div class="row">
-        <div class="col-md-3">
-            <br>
-            <img src=<%= @gravatar %> class="thumbnail" >
-            <br>
-        </div>
+<div class="row">
+    <div class="col-md-3">
+        <br>
+        <img src=<%= @gravatar %> class="thumbnail">
+        <br>
+    </div>
 
-        <div class="col-md-9" >
-                <br>
-                <h2><%= @user.name if @user.name %></h2>
-                <h5><%= @user.email if @user.email %></h5>
-                <h5><%= link_to "Adicionar amigo", add_friend_path, {class: "btn btn-primary"} %></h5>
-        </div>
+    <div class="col-md-9">
+        <br>
+        <h2><%= @user.name if @user.name %></h2>
+        <h5><%= @user.email if @user.email %></h5>
+        <h5><%= link_to "Adicionar amigo", add_friend_path, {class: "btn btn-primary"} %></h5>
     </div>
 </div>
 
 <br>
 
-<div class="container" style="background-color: whitesmoke">
-    <%= render :partial => 'userdata/userdata_list' %>
-</div>
+<%= render :partial => 'userdata/userdata_list' %>
 
 <br>
 
-<div class="container" style="background-color: whitesmoke">
-    <h3>Análises</h3>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Local</th>
-            <th>Comentário</th>
-            <th>Nota</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @reviews.each do |review| %>
-            <tr>
-                <td><%= link_to GoogleApi.place_details(review.place_id)['name'], search_show_path(:place_id => review.place_id) %></td>
-                <td><%= review.comment %></td>
-                <td><%= review.rate %></td>
-            </tr>
-        <% end %>
-        </tbody>
-    </table>
-</div>
+<%= render :partial => 'reviews/review_list' %>
 
 <br>
 
-<div class="container" style="background-color: whitesmoke">
-    <%= render :partial => 'friends' %>
-</div>
+<%= render :partial => 'users/friends' %>
