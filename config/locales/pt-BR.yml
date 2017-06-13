@@ -31,6 +31,7 @@ pt-BR:
       create: "Adicionar"
       update: "Atualizar"
 
+  all: 'tudo'
   accounting: 'contabilidade'
   administrative_area_level_1: 'estado'
   administrative_area_level_2: 'cidade'

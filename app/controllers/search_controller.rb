@@ -1,18 +1,21 @@
 class SearchController < ApplicationController
+    require 'set'
 
     def index
         session[:search] = params[:search] if params[:search]
         session[:radius] = params[:radius] if params[:radius]
-        search = session[:search]
-        radius = session[:radius]
+        @search = session[:search]
+        @radius = session[:radius]
+        type = params[:type]
         if session[:search].empty? or session[:radius].empty?
             redirect_to :back, alert: 'Preencha todos os campos' and return
         end
 
         page_token = params[:page_token]
-        results = GoogleApi.text_search(search)
-        data = GoogleApi.nearby_search(results, radius, page_token)
+        results = GoogleApi.text_search(@search)
+        data = GoogleApi.nearby_search(results, @radius, page_token, type)
         @results = data['results']
+        @types = get_types(@results)
         @next_page_token = data['next_page_token']
         @origin_id = results['place_id']
     end
@@ -36,6 +39,16 @@ class SearchController < ApplicationController
     end
 
     private
+
+    def get_types(results)
+        types = SortedSet.new
+        results.each do |result|
+            result['types'].each do |type|
+                types.add(type)
+            end
+        end
+        return types
+    end
 
     def get_weekday_text(opening_hours)
         if opening_hours

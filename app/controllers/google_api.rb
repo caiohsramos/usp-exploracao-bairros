@@ -7,10 +7,10 @@ module GoogleApi
         data['results'][0]
     end
 
-    def self.nearby_search(results, radius, page_token="")
+    def self.nearby_search(results, radius, page_token="", type="all")
         lat = results['geometry']['location']['lat']
         lng = results['geometry']['location']['lng']
-        url = URI.encode("https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=#{page_token}&location=#{lat},#{lng}&radius=#{radius}&type=all&language=pt-BR&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
+        url = URI.encode("https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=#{page_token}&location=#{lat},#{lng}&radius=#{radius}&type=#{type}&language=pt-BR&key=AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM")
         JSON.load(open(url))
     end
 

@@ -1,11 +1,20 @@
 <h4><span class="glyphicon glyphicon-search"></span> Resultado da busca</h4>
 
+<h4><span class="glyphicon glyphicon-filter"></span> Filtros:</h4>
+<% @types.each do |type| %>
+    <%= link_to (t type), search_index_path(:search => @search, :radius => @radius, :type => type), class: 'label label-primary' %>
+<% end %>
+<%= link_to 'mostrar todos os resultados', search_index_path(:search => @search, :radius => @radius, :type => 'all'), class: 'label label-success' %>
+
+<br>
+
 <table class="table table-hover">
     <thead>
     <tr>
         <th colspan="1"></th>
         <th>Nome e endereço do local</th>
         <th>Tipo</th>
+        <th colspan="4"></th>
     </tr>
     </thead>
 
