@@ -3,6 +3,11 @@
     <thead>
     <tr>
         <th>Nome</th>
+        <% if @user == current_user %>
+            <th>Comentário Privado</th>
+        <% else %>
+            <th colspan="2"></th>
+        <% end %>
         <th colspan="3"></th>
     </tr>
     </thead>
@@ -14,7 +19,7 @@
 
             <% if current_user.id == userdatum.user_id %>
                 <td><%= userdatum.comment %></td>
-                <td>
+                <td class="text-right">
                     <%= link_to 'Editar', edit_userdatum_path(userdatum), class: 'btn btn-warning' %>
                     <%= link_to 'Apagar', userdatum, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
                 </td>

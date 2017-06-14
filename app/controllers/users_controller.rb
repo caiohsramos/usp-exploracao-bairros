@@ -12,7 +12,6 @@ class UsersController < ApplicationController
         @friends = Friend.where("user_id = ?", @user.id).where("status = ?", 2)
         @gravatar = "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(@user.email)}?s=150"
 
-
         puts "Reviews: #{@reviews}"
         @reviews.each do |r|
             puts "r: #{r}"
