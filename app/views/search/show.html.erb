@@ -24,9 +24,9 @@
 
         <br>
 
-        <h4><span class="glyphicon glyphicon-star"></span> Nota</h4>
+        <h4><span class="glyphicon glyphicon-star"></span> Avaliação</h4>
         <% if @count == 0 %>
-            <address>Sem Nota</address>
+            <address>Sem Avaliação</address>
         <% else %>
             <address><%= (@stars/@count).round(1) %> / 5.0</address>
         <% end %>
@@ -97,7 +97,7 @@
                             <%= review.comment %>
                         </td>
                         <td>
-                            <b>Nota</b>
+                            <b>Avaliação</b>
                             <h3><%= review.rate %></h3>
                         </td>
 
