@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
     match 'search' => 'search#index', via: 'post'
     match 'search/show/' => 'search#show', as: :search_show, via: 'get'
+    match 'user/:id' => 'users#destroy', as: :destroy_user, via: 'delete'
     match 'user/:id/add_friend' => 'users#add_friend', as: :add_friend, via: 'get'
     match 'user/:id/accept_friend' => 'users#accept_friend', as: :accept_friend, via: 'get'
     match 'user/friends' => 'users#friends', as: :friends, via: 'get'

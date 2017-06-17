@@ -11,11 +11,12 @@ class UsersController < ApplicationController
         @reviews = Review.where("user_id = ?", @user.id)
         @friends = Friend.where("user_id = ?", @user.id).where("status = ?", 2)
         @gravatar = "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(@user.email)}?s=150"
+    end
 
-        puts "Reviews: #{@reviews}"
-        @reviews.each do |r|
-            puts "r: #{r}"
-        end
+    def destroy
+        @user = User.find User.decrypt(params[:id])
+        @user.destroy
+        redirect_to users_path, :flash => {:notice => "Remoção com sucesso!"}
     end
 
     def add_friend
@@ -43,16 +44,13 @@ class UsersController < ApplicationController
 
     def notifications
         @user = current_user
-
         @friends = Friend.where("friend_id = ?", @user.id)
-        puts "not: user=> #{@user.id}"
         @friendRequest = Array.new
 
         @friends.each do |friend|
             if friend.status == 1
                 @friendRequest << friend
             end
-            puts "friend: #{friend.user_id} | #{friend.friend_id}"
         end
     end
 

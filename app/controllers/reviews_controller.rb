@@ -12,9 +12,9 @@ class ReviewsController < ApplicationController
         alreadyReviewd = Review.where("user_id = ? AND place_id = ?", current_user.id, session[:place_id]).first
 
         if alreadyReviewd.nil? and @review.save!
-            redirect_to search_show_path, notice: "Comentario adiciondo com sucesso."
+            redirect_to search_show_path, notice: 'Comentario adiciondo com sucesso'
         else
-            redirect_to search_show_path, alert: "Erro! Você ja comentou sobre esse local."
+            redirect_to search_show_path, alert: 'Erro! Você ja comentou sobre esse local'
         end
     end
 
@@ -26,7 +26,7 @@ class ReviewsController < ApplicationController
         @review = Review.find(params[:id])
         respond_to do |format|
             if @review.update(review_params)
-                format.html {redirect_to search_show_path, notice: 'Review atualizado com sucesso'}
+                format.html {redirect_to search_show_path, notice: 'Comentário atualizado com sucesso'}
                 format.json {render :show, status: :ok, location: @review}
             else
                 format.html {render :edit}
@@ -39,7 +39,7 @@ class ReviewsController < ApplicationController
         @review = Review.find(params[:id])
         @review.destroy
         respond_to do |format|
-            format.html {redirect_to search_show_path, notice: 'Dado apagado com sucesso'}
+            format.html {redirect_to search_show_path, notice: 'Comentário apagado com sucesso'}
             format.json {head :no_content}
         end
     end
