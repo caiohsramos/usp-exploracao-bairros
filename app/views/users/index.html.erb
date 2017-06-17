@@ -1,16 +1,24 @@
 <div class="container">
     <div class="row">
         <h3>Usuários</h3>
-        <div class="column">
-            <table class="table">
-                <tbody>
-                <% @users.each do |user| %>
-                    <tr>
-                        <%= render user %>
-                    </tr>
-                <% end %>
-                </tbody>
-            </table>
-        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th colspan="1"></th>
+                <th>Nome</th>
+                <th>E-Mail</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% @users.each do |user| %>
+                <tr>
+                    <%= render user %>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+
     </div>
 </div>

@@ -5,7 +5,7 @@ class UserdataController < ApplicationController
     # GET /userdata
     # GET /userdata.json
     def index
-        @user = User.find(current_user)
+        @user = User.find(current_user.id)
         @userdata = Userdatum.where("user_id = ?", current_user.id)
         @reviews = Review.where("user_id = ?", current_user.id)
         @friends = Friend.where("user_id = ?", current_user.id).where("status = ?", 2)

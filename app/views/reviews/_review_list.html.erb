@@ -2,15 +2,17 @@
 <table class="table table-hover">
     <thead>
     <tr>
+        <th colspan="1"></th>
         <th>Local</th>
         <th>Comentário Público</th>
         <th>Nota</th>
-        <th colspan="4"></th>
+        <th colspan="5"></th>
     </tr>
     </thead>
     <tbody>
     <% @reviews.each do |review| %>
         <tr>
+            <td width="50"><img src=<%= GoogleApi.place_details(review.place_id)['icon'] %>></td>
             <td><%= link_to GoogleApi.place_details(review.place_id)['name'], search_show_path(:place_id => review.place_id) %></td>
             <td><%= review.comment %></td>
             <td><%= review.rate %></td>

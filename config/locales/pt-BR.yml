@@ -19,6 +19,7 @@ pt-BR:
           attributes:
             email:
               invalid: "inválido"
+              blank: "não pode estar em branco"
             password:
               too_short: "muito curta"
               blank: "não pode estar em branco"
