@@ -2,7 +2,7 @@
     <h2><%= @name %></h2>
     <p>
         <%= link_to 'Adicionar aos Favoritos', new_userdatum_path(:name => @name, :place_id => @place_id), class: 'btn btn-primary' if user_signed_in? %>
-        <%= link_to 'Voltar', :back, class: 'btn btn-default' %>
+        <%= link_to 'Voltar', 'javascript:history.go(-1);', class: 'btn btn-default' %>
     </p>
 
     <div class="col-md-4">
