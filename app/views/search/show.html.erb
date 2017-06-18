@@ -80,10 +80,11 @@
             <% @reviews.each do |review| %>
                 <% if User.exists?(review.user_id) %>
                     <tr>
-                        <td><img src=<%= GravatarApi.small_photo(User.find(review.user_id).email) %>></td>
+                        <td width="100"><img src=<%= GravatarApi.small_photo(User.find(review.user_id).email) %>></td>
                         <td>
                             <h5>
                                 <%= link_to User.find(review.user_id).name, user_path(id: User.encrypt(review.user_id)) %>
+                                <br>
                                 <small><%= review.updated_at %></small>
                             </h5>
 

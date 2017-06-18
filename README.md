@@ -21,7 +21,11 @@ user = User.where(email: 'example@example.com')
 user.first.update_attribute(:admin, true)
 ```
 
-## Você pode ver nossa aplicação rodando em:
+## Para executar testes:
 ```bash
-https://exploracao-bairros.herokuapp.com
+bundle exec rspec
 ```
+
+## Você pode ver nossa aplicação rodando em:
+
+https://exploracao-bairros.herokuapp.com
