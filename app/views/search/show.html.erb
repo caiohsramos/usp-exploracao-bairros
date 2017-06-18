@@ -74,36 +74,29 @@
         </div>
 
         <br>
-
+        <h4><span class="glyphicon glyphicon-comment"></span> Comentários:</h4>
         <table class="table table-hover">
-            <thead>
-            <th>
-                <h4><span class="glyphicon glyphicon-comment"></span> Comentários:</h4>
-            </th>
-            <th colspan="2"></th>
-            </thead>
-
             <tbody>
             <% @reviews.each do |review| %>
                 <% if User.exists?(review.user_id) %>
                     <tr>
+                        <td><img src=<%= GravatarApi.small_photo(User.find(review.user_id).email) %>></td>
                         <td>
                             <h5>
                                 <%= link_to User.find(review.user_id).name, user_path(id: User.encrypt(review.user_id)) %>
-                                <br>
                                 <small><%= review.updated_at %></small>
                             </h5>
 
                             <%= review.comment %>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <b>Avaliação</b>
                             <h3><%= review.rate %></h3>
                         </td>
 
                         <% if current_user %>
                             <% if review.user_id == current_user.id or current_user.admin %>
-                                <td>
+                                <td class="text-right">
                                     <%= link_to 'Editar', edit_review_path(review), class: 'btn btn-warning' %>
                                     <%= link_to 'Apagar', review, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
                                 </td>
