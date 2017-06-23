@@ -9,12 +9,23 @@ bundle install
 ```bash
 echo domain: "example.com">config/application.yml
 ```
-## Iniciar o banco de dados
+## Iniciar o banco de dados:
 ```bash
 rake db:migrate
 ```
 
-Você pode ver nossa aplicação rodando em:
+## Para tornar-se Administrador:
+```bash
+rails console
+user = User.where(email: 'example@example.com')
+user.first.update_attribute(:admin, true)
+```
 
+## Para executar testes:
+```bash
+bundle exec rspec
+```
+
+## Você pode ver nossa aplicação rodando em:
 
 https://exploracao-bairros.herokuapp.com

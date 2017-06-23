@@ -1,0 +1,24 @@
+<th><h4><span class="glyphicon glyphicon-user"></span> Amigos</h4></th>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th colspan="1"></th>
+        <th colspan="2"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @friends.each do |friend| %>
+        <% if User.exists?(friend.friend_id) %>
+            <tr>
+                <td width="50"><img src=<%= GravatarApi.small_photo(User.find(friend.friend_id).email) %>></td>
+                <td><%= link_to User.find(friend.friend_id).name, user_path(id: User.encrypt(friend.friend_id)) %></td>
+
+                <% if @user == current_user %>
+                    <td class="text-right"><%= link_to 'Cancelar amizade', cancel_friend_path(friend_id: User.encrypt(friend.friend_id)), method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %></td>
+                <% end %>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+</table>

@@ -7,15 +7,16 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find User.decrypt(params[:id])
-        @userdata = Userdatum.where(:user_id => current_user)
-        @reviews = Review.where("user_id = ?", current_user)
+        @userdata = Userdatum.where(:user_id => @user.id)
+        @reviews = Review.where("user_id = ?", @user.id)
         @friends = Friend.where("user_id = ?", @user.id).where("status = ?", 2)
-        
-        puts "Reviews: #{@reviews}"
-        @reviews.each do |r|
-            puts "r: #{r}"
-        end
+        @gravatar = GravatarApi.big_photo(@user.email)
+    end
 
+    def destroy
+        @user = User.find User.decrypt(params[:id])
+        @user.destroy
+        redirect_to users_path, :flash => {:notice => "Remoção com sucesso!"}
     end
 
     def add_friend
@@ -27,8 +28,8 @@ class UsersController < ApplicationController
           redirect_to :back, :alert => "Este é você!"
           return
         end
-        if !checkFriend
 
+        if !checkFriend
             @friendship = Friend.new(user_id: @user.id, friend_id: @friend.id, status: 1)
 
             if @friendship.save!
@@ -37,22 +38,19 @@ class UsersController < ApplicationController
                 redirect_to :back, :alert => "Problema ao solicitar amizade."
             end
         else
-            redirect_to :back, :alert => "Você ja solicitou essa amizade amizade."
+            redirect_to :back, :alert => "Você ja solicitou essa amizade."
         end
     end
 
     def notifications
         @user = current_user
-
         @friends = Friend.where("friend_id = ?", @user.id)
-        puts "not: user=> #{@user.id}"
         @friendRequest = Array.new
 
         @friends.each do |friend|
             if friend.status == 1
                 @friendRequest << friend
             end
-            puts "friend: #{friend.user_id} | #{friend.friend_id}"
         end
     end
 
@@ -70,7 +68,6 @@ class UsersController < ApplicationController
         else
             redirect_to :back, :alert => "Problema ao aceitar amizade amizade."
         end
-
     end
 
     def friends
@@ -90,24 +87,17 @@ class UsersController < ApplicationController
         else
             redirect_to :back, :alert => "Problema ao cancelar amizade amizade."
         end
-
     end
 
     def cancel_request
         @user = User.find current_user.id
         @friend = User.find User.decrypt(params[:friend_id])
-
-
         @friendship2 = Friend.where("user_id = ?", @friend.id).where("friend_id = ?", @user.id).first
-
-
 
         if @friendship2.delete
             redirect_to :back, :flash => {:notice => "Remoção com sucesso!"}
         else
            redirect_to :back, :alert => "Problema ao cancelar amizade amizade."
         end
-
     end
-
 end

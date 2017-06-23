@@ -1,62 +1,87 @@
 class SearchController < ApplicationController
 
-    include GoogleApi
+    before_action :set_session, only: [:index, :show]
+    before_action :validate_search, only: [:index]
+    require 'set'
 
     def index
-        session[:search] = params[:search] if params[:search]
-        session[:radius] = params[:radius] if params[:radius]
-        search = session[:search]
-        radius = session[:radius]
-        if session[:search].empty? or session[:radius].empty?
-            redirect_to :back, alert: 'Preencha todos os campos' and return
-        end
-
+        @search = session[:search]
+        @radius = session[:radius]
+        type = params[:type]
         page_token = params[:page_token]
-        data = GoogleApi.nearby_search(search, radius, page_token)
+        results = GoogleApi.text_search(@search)
+        data = GoogleApi.nearby_search(results, @radius, page_token, type)
         @results = data['results']
+        @types = get_types(@results)
         @next_page_token = data['next_page_token']
-        @dict = GoogleApi.dict
+        @origin_id = results['place_id']
     end
 
     def show
-        session[:place_id] = params[:place_id] if params[:place_id]
         @place_id = session[:place_id]
+        @origin_id = params[:origin_id]
         result = GoogleApi.place_details(@place_id)
-
         @name = result['name']
-        @address_components = result['address_components']
-        @formatted_address = result['formatted_address']
         @formatted_number = result['formatted_phone_number']
-        opening_hours = result['opening_hours']
-        if opening_hours
-            @weekday_text = opening_hours['weekday_text']
-        else
-            @weekday_text = ['sem informação']
-        end
-        @map = GoogleApi.static_map(@formatted_address)
-        @photos = []
-        elements = result['photos']
-        if elements
-            elements.each do |element|
-                @photos << GoogleApi.place_photos(element['photo_reference'])
-            end
-        end
-
+        @formatted_address = result['formatted_address']
+        @map = GoogleApi.get_map(@origin_id, @place_id)
+        @weekday_text = get_weekday_text(result['opening_hours'])
+        @photos = get_photos(result['photos'])
 
         @reviews = Review.where("place_id = ?", session[:place_id])
         @review = Review.new
-        @stars = 0.0
-        count = 0
+        @count = @reviews.count
+        @stars = get_stars(@reviews)
+    end
 
-        @reviews.each do |review|
-            @stars = @stars + review.rate
-            count = count + 1
+    private
+
+    def set_session
+        session[:search] = params[:search] if params[:search]
+        session[:radius] = params[:radius] if params[:radius]
+        session[:place_id] = params[:place_id] if params[:place_id]
+    end
+
+    def validate_search
+        if session[:search].empty? or session[:radius].empty?
+            redirect_to :back, alert: 'Preencha todos os campos' and return
         end
+    end
 
-        if (count == 0)
-            count = 1
+    def get_types(results)
+        types = SortedSet.new
+        results.each do |result|
+            result['types'].each do |type|
+                types.add(type)
+            end
         end
+        return types
+    end
 
-        @stars = @stars / count
+    def get_weekday_text(opening_hours)
+        if opening_hours
+            weekday_text = opening_hours['weekday_text']
+        else
+            weekday_text = ['sem informação']
+        end
+        return weekday_text
+    end
+
+    def get_photos(elements)
+        photos = []
+        if elements
+            elements.each do |element|
+                photos << GoogleApi.place_photos(element['photo_reference'])
+            end
+        end
+        return photos
+    end
+
+    def get_stars(reviews)
+        stars = 0.0
+        reviews.each do |review|
+            stars = stars + review.rate
+        end
+        return stars
     end
 end

@@ -5,7 +5,10 @@ class UserdataController < ApplicationController
     # GET /userdata
     # GET /userdata.json
     def index
-        @userdata = Userdatum.where(:user_id => current_user)
+        @user = User.find(current_user.id)
+        @userdata = Userdatum.where("user_id = ?", current_user.id)
+        @reviews = Review.where("user_id = ?", current_user.id)
+        @friends = Friend.where("user_id = ?", current_user.id).where("status = ?", 2)
     end
 
     # GET /userdata/1
@@ -33,7 +36,7 @@ class UserdataController < ApplicationController
 
         respond_to do |format|
             if @userdatum.save
-                format.html {redirect_to search_index_path, notice: 'Dado adicionado com sucesso'}
+                format.html {redirect_to search_index_path, notice: 'Comentário adicionado com sucesso'}
                 format.json {render :show, status: :created, location: @userdatum}
             else
                 format.html {render :new}
@@ -47,7 +50,7 @@ class UserdataController < ApplicationController
     def update
         respond_to do |format|
             if @userdatum.update(userdatum_params)
-                format.html {redirect_to userdata_path, notice: 'Dado atualizado com sucesso'}
+                format.html {redirect_to userdata_path, notice: 'Comentário atualizado com sucesso'}
                 format.json {render :show, status: :ok, location: @userdatum}
             else
                 format.html {render :edit}
@@ -61,7 +64,7 @@ class UserdataController < ApplicationController
     def destroy
         @userdatum.destroy
         respond_to do |format|
-            format.html {redirect_to userdata_url, notice: 'Dado apagado com sucesso'}
+            format.html {redirect_to userdata_url, notice: 'Comentário apagado com sucesso'}
             format.json {head :no_content}
         end
     end

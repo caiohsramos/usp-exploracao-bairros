@@ -1,2 +1,6 @@
+<td><img src=<%= GravatarApi.small_photo(user.email)%>></td>
 <td><%= link_to user.name, user %></td>
 <td><%= link_to user.email, user %></td>
+<% if current_user.admin %>
+    <td><%= link_to "Cancelar conta", destroy_user_path(user), :data => {:confirm => "Você tem certeza?"}, :method => :delete, :class => 'btn btn-danger pull-right' %></td>
+<% end %>

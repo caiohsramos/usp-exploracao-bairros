@@ -1,4 +1,12 @@
-<h3>Resultado da busca</h3>
+<h4><span class="glyphicon glyphicon-search"></span> Resultado da busca</h4>
+
+<h4><span class="glyphicon glyphicon-filter"></span> Filtros:</h4>
+<% @types.each do |type| %>
+    <%= link_to (t type), search_index_path(:search => @search, :radius => @radius, :type => type), class: 'label label-primary' %>
+<% end %>
+<%= link_to 'mostrar todos os resultados', search_index_path(:search => @search, :radius => @radius, :type => 'all'), class: 'label label-success' %>
+
+<br>
 
 <table class="table table-hover">
     <thead>
@@ -6,6 +14,7 @@
         <th colspan="1"></th>
         <th>Nome e endereço do local</th>
         <th>Tipo</th>
+        <th colspan="4"></th>
     </tr>
     </thead>
 
@@ -32,7 +41,7 @@
                 <% end %>
             </td>
 
-            <td><%= link_to 'Detalhes', search_show_path(:place_id => result['place_id']), class: 'btn btn-success' %></td>
+            <td><%= link_to 'Detalhes', search_show_path(:origin_id => @origin_id, :place_id => result['place_id']), class: 'btn btn-success' %></td>
         </tr>
     <% end %>
     </tbody>

@@ -1,0 +1,165 @@
+pt-BR:
+  activerecord:
+    attributes:
+      user:
+        name: "Nome"
+        password: "Senha"
+        password_confirmation: "Confirmação de senha"
+        current_password: "Senha atual"
+      userdatum:
+        name: "Nome"
+        comment: "Comentário Privado"
+      review:
+        comment: "Comentário Público"
+        rate: "Nota"
+
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              invalid: "inválido"
+              blank: "não pode estar em branco"
+            password:
+              too_short: "muito curta"
+              blank: "não pode estar em branco"
+            password_confirmation:
+              confirmation: "não corresponde"
+            current_password:
+              blank: "não pode estar em branco"
+  helpers:
+    submit:
+      create: "Adicionar"
+      update: "Atualizar"
+
+  all: 'tudo'
+  accounting: 'contabilidade'
+  administrative_area_level_1: 'estado'
+  administrative_area_level_2: 'cidade'
+  administrative_area_level_3: ''
+  administrative_area_level_4: 'bairro'
+  administrative_area_level_5: ''
+  airport: 'aeroporto'
+  amusement_park: 'parque de diversões'
+  aquarium: 'aquário'
+  art_gallery: 'galeria de arte'
+  atm: 'caixa eletrônico'
+  bakery: 'padaria'
+  bank: 'banco'
+  bar: 'bar'
+  beauty_salon: 'salão de beleza'
+  bicycle_store: 'loja de bicicletas'
+  book_store: 'livraria'
+  bowling_alley: 'boliche'
+  bus_station: 'rodoviária'
+  cafe: 'lanchonete'
+  campground: 'local de acampamento'
+  car_dealer: 'revenda de automóveis'
+  car_rental: 'locação de automóveis'
+  car_repair: 'oficina mecânica'
+  car_wash: 'lava-jato'
+  casino: 'cassino'
+  cemetery: 'cemitério'
+  church: 'igreja'
+  city_hall: 'prefeitura'
+  clothing_store: 'loja de roupas'
+  colloquial_area: 'entidade'
+  convenience_store: 'loja de conveniência'
+  country: 'país'
+  courthouse: 'tribunal'
+  dentist: 'dentista'
+  department_store: 'loja de departamento'
+  doctor: 'médico'
+  electrician: 'eletricista'
+  electronics_store: 'loja de eletrônicos'
+  embassy: 'embaixada'
+  establishment: 'estabelecimento'
+  finance: 'finança'
+  fire_station: 'bombeiros'
+  floor: 'andar'
+  florist: 'florista'
+  food: 'alimentação'
+  funeral_home: 'casa funerária'
+  furniture_store: 'loja de móveis'
+  gas_station: 'posto de gasolina'
+  general_contractor: 'empreiteiro geral'
+  geocode: 'código geográfico'
+  grocery_or_supermarket: 'supermercado'
+  gym: 'academia'
+  hair_care: 'cabeleireiro'
+  hardware_store: 'loja de material de construção'
+  health: 'saúde'
+  hingu_temple: 'templo hindú'
+  home_goods_store: 'loja de artigos para o lar'
+  hospital: 'hospital'
+  insurance_agency: 'agência de seguros'
+  intersection: 'intersecção'
+  jewelry_store: 'joalheria'
+  laundry: 'lavanderia'
+  lawyer: 'advogacia'
+  library: 'biblioteca'
+  liquor_store: 'loja de bebidas alcoólicas'
+  local_goverment_office: 'escritório do governo local'
+  locality: 'entidade política de cidade ou município'
+  locksmith: 'chaveiro'
+  lodging: 'pousada'
+  meal_delivery: 'entrega de refeições'
+  meal_takeaway: 'refeição para viagem'
+  mosque: 'mesquita'
+  movie_rental: 'locadora de filmes'
+  movie_theater: 'cinema'
+  moving_company: 'empresa de mudanças'
+  museum: 'museu'
+  natural_feature: 'característica natural proeminente'
+  neighborhood: 'vizinhança'
+  night_club: 'casa noturna'
+  painter: 'pintor'
+  park: 'parque'
+  parking: 'estacionamento'
+  pet_store: 'loja de animais'
+  pharmacy: 'farmácia'
+  physiotherapist: 'fisioterapeuta'
+  place_of_worship: 'local de culto'
+  plumber: 'encanador'
+  point_of_interest: 'ponto de interesse'
+  police: 'departamento de polícia'
+  political: 'entidade política'
+  post_box: 'caixa de correio'
+  post_office: 'agência de correio'
+  postal_code: 'código postal'
+  postal_code_prefix: 'prefixo de código postal'
+  postal_code_suffix: 'sufixo de código postal'
+  postal_town: 'agrupamento de áreas geográficas'
+  premise: 'entidade dentro de outra'
+  real_estate_agency: 'agência imobiliária'
+  restaurant: 'restaurante'
+  roofing_contractor: 'contratante de telhados'
+  room: 'sala'
+  route: 'rota'
+  rv_park: 'parque de estacionamento'
+  school: 'escola'
+  shoe_store: 'loja de calçados'
+  shopping_mall: 'centro de compras'
+  spa: 'fonte de água mineral'
+  stadium: 'estádio'
+  storage: 'armazém'
+  store: 'loja'
+  street_address: 'endereço de rua'
+  street_number: 'número da rua'
+  sublocality: 'sub-entidade política de cidade ou município'
+  sublocality_level_4: 'sub-entidade política de cidade ou município'
+  sublocality_level_5: 'sub-entidade política de cidade ou município'
+  sublocality_level_3: 'sub-entidade política de cidade ou município'
+  sublocality_level_2: 'sub-entidade política de cidade ou município'
+  sublocality_level_1: 'sub-entidade política de cidade ou município'
+  subpremise: 'entidade dentro de outra entidade dentro de outra'
+  subway_station: 'estação de metrô'
+  synagogue: 'sinagoga'
+  taxi_stand: 'ponto de táxi'
+  train_station: 'estação de trem'
+  transit_station: 'estação de trânsito'
+  travel_agency: 'agência de viagens'
+  university: 'universidade'
+  veterinary_care: 'veterinário'
+  ward: 'enfermaria'
+  zoo: 'zoológico'
