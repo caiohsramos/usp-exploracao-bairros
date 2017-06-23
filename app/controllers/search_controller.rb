@@ -1,17 +1,13 @@
 class SearchController < ApplicationController
 
+    before_action :set_session, only: [:index, :show]
+    before_action :validate_search, only: [:index]
     require 'set'
 
     def index
-        session[:search] = params[:search] if params[:search]
-        session[:radius] = params[:radius] if params[:radius]
         @search = session[:search]
         @radius = session[:radius]
         type = params[:type]
-        if session[:search].empty? or session[:radius].empty?
-            redirect_to :back, alert: 'Preencha todos os campos' and return
-        end
-
         page_token = params[:page_token]
         results = GoogleApi.text_search(@search)
         data = GoogleApi.nearby_search(results, @radius, page_token, type)
@@ -22,7 +18,6 @@ class SearchController < ApplicationController
     end
 
     def show
-        session[:place_id] = params[:place_id] if params[:place_id]
         @place_id = session[:place_id]
         @origin_id = params[:origin_id]
         result = GoogleApi.place_details(@place_id)
@@ -40,6 +35,18 @@ class SearchController < ApplicationController
     end
 
     private
+
+    def set_session
+        session[:search] = params[:search] if params[:search]
+        session[:radius] = params[:radius] if params[:radius]
+        session[:place_id] = params[:place_id] if params[:place_id]
+    end
+
+    def validate_search
+        if session[:search].empty? or session[:radius].empty?
+            redirect_to :back, alert: 'Preencha todos os campos' and return
+        end
+    end
 
     def get_types(results)
         types = SortedSet.new
