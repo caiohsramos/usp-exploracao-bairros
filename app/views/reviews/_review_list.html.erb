@@ -1,43 +1,51 @@
 <h4><span class="glyphicon glyphicon-comment"></span> Análises</h4>
 <table class="table table-hover">
-    <thead>
-    <tr>
-        <th colspan="1"></th>
-        <th>Local e Comentário Público</th>
-        <th colspan="3">
+    <% if @reviews.empty? %>
 
-    </tr>
-    </thead>
-    <tbody>
-    <% @reviews.each do |review| %>
+        Nenhuma análise
+
+    <% else %>
+
+        <thead>
         <tr>
-            <% result = GoogleApi.place_details(review.place_id) %>
-            <td width="50"><img src=<%= result['icon'] %>></td>
-            <td>
-                <h5>
-                    <%= link_to result['name'], search_show_path(:place_id => review.place_id) %>
-                    <br>
-                    <small><%= result['vicinity'] %></small>
-                </h5>
-                <%= review.comment %>
-
-            </td>
-            <td class="text-center">
-                <b>Avaliação</b>
-                <h3><%= review.rate %></h3>
-            </td>
-
-            <% if current_user %>
-                <% if review.user_id == current_user.id or current_user.admin %>
-                    <td class="text-right">
-                        <%= link_to 'Editar', edit_review_path(review), class: 'btn btn-warning' %>
-                        <%= link_to 'Apagar', review, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
-                    </td>
-                <% end %>
-            <% else %>
-                <th colspan="4"></th>
-            <% end %>
+            <th colspan="1"></th>
+            <th class="text-left">Local e Comentário Público</th>
+            <th colspan="3">
         </tr>
+        </thead>
+
+        <tbody>
+        <% @reviews.each do |review| %>
+            <tr>
+                <% result = GoogleApi.place_details(review.place_id) %>
+                <td width="50"><img src=<%= result['icon'] %>></td>
+                <td>
+                    <h5>
+                        <%= link_to result['name'], search_show_path(:place_id => review.place_id) %>
+                        <br>
+                        <small><%= result['vicinity'] %></small>
+                    </h5>
+                    <%= review.comment %>
+
+                </td>
+                <td class="text-center">
+                    <b>Avaliação</b>
+                    <h3><%= review.rate %></h3>
+                </td>
+
+                <% if current_user %>
+                    <% if review.user_id == current_user.id or current_user.admin %>
+                        <td class="text-right">
+                            <%= link_to 'Editar', edit_review_path(review), class: 'btn btn-warning' %>
+                            <%= link_to 'Apagar', review, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
+                        </td>
+                    <% end %>
+                <% else %>
+                    <th colspan="4"></th>
+                <% end %>
+            </tr>
+        <% end %>
+        </tbody>
+
     <% end %>
-    </tbody>
 </table>

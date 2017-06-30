@@ -1,41 +1,49 @@
 <h4><span class="glyphicon glyphicon-bookmark"></span> Locais Favoritos</h4>
 <table class="table table-hover">
-    <thead>
-    <tr>
-        <th colspan="1"></th>
+    <% if @userdata.empty? %>
 
-        <% if @user.id == current_user.id %>
-            <th>Local e Comentário Privado</th>
-        <% else %>
-            <th>Local</th>
-        <% end %>
+        Nenhum local favorito
 
-        <th colspan="3"></th>
-    </tr>
-    </thead>
+    <% else %>
 
-    <tbody>
-    <% @userdata.each do |userdatum| %>
+        <thead>
         <tr>
-            <% result = GoogleApi.place_details(userdatum.place_id) %>
-            <td width="50"><img src=<%= result['icon'] %>></td>
-            <td>
-                <h5>
-                    <%= link_to userdatum.name, userdatum %>
-                    <br>
-                    <small><%= result['vicinity'] %></small>
-                </h5>
-                <% if current_user.id == userdatum.user_id %>
-                    <%= userdatum.comment %>
-                <td class="text-right">
-                    <%= link_to 'Editar', edit_userdatum_path(userdatum), class: 'btn btn-warning' %>
-                    <%= link_to 'Apagar', userdatum, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
-                </td>
+            <th colspan="1"></th>
+
+            <% if @user.id == current_user.id %>
+                <th class="text-left">Local e Comentário Privado</th>
             <% else %>
-                <th colspan="3"></th>
+                <th class="text-left">Local</th>
             <% end %>
-            </td>
+
+            <th colspan="3"></th>
         </tr>
+        </thead>
+
+        <tbody>
+        <% @userdata.each do |userdatum| %>
+            <tr>
+                <% result = GoogleApi.place_details(userdatum.place_id) %>
+                <td width="50"><img src=<%= result['icon'] %>></td>
+                <td>
+                    <h5>
+                        <%= link_to userdatum.name, userdatum %>
+                        <br>
+                        <small><%= result['vicinity'] %></small>
+                    </h5>
+                    <% if current_user.id == userdatum.user_id %>
+                        <%= userdatum.comment %>
+                    <td class="text-right">
+                        <%= link_to 'Editar', edit_userdatum_path(userdatum), class: 'btn btn-warning' %>
+                        <%= link_to 'Apagar', userdatum, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
+                    </td>
+                <% else %>
+                    <th colspan="3"></th>
+                <% end %>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+
     <% end %>
-    </tbody>
 </table>
