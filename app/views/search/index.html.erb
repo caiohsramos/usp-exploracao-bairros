@@ -1,6 +1,8 @@
 <div>
     <h4><span class="glyphicon glyphicon-search"></span> Resultado da busca</h4>
 
+    <img src=<%= @map %>>
+
     <h4><span class="glyphicon glyphicon-filter"></span> Filtros:</h4>
     <% @types.each do |type| %>
         <%= link_to (t type), search_index_path(:search => @search, :radius => @radius, :type => type), class: 'label label-primary' %>

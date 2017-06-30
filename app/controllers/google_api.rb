@@ -37,18 +37,22 @@ module GoogleApi
 
 
     # Google Static Map API
-    def self.static_map(coordinates, polyline_data = "")
-        URI.encode("https://maps.googleapis.com/maps/api/staticmap?center=#{coordinates['lat']},#{coordinates['lng']}&size=640x480&path=enc:#{polyline_data}&scale=1&markers=color:red|#{coordinates['lat']},#{coordinates['lng']}&key=" + ENV['googleapikey'])
+    def self.static_map(coordinates, polyline_data = "", zoom)
+        if zoom == 0
+            return URI.encode("https://maps.googleapis.com/maps/api/staticmap?center=#{coordinates['lat']},#{coordinates['lng']}&size=640x480&path=enc:#{polyline_data}&scale=1&markers=color:red|#{coordinates['lat']},#{coordinates['lng']}&key=" + ENV['googleapikey'])
+        else
+            return URI.encode("https://maps.googleapis.com/maps/api/staticmap?center=#{coordinates['lat']},#{coordinates['lng']}&size=640x480&path=enc:#{polyline_data}&zoom=#{zoom}&scale=1&markers=color:red|#{coordinates['lat']},#{coordinates['lng']}&key=" + ENV['googleapikey'])
+        end
     end
 
-    def self.get_map(origin_id, destination_id)
+    def self.get_map(origin_id, destination_id, zoom = 0)
         if not origin_id
             polyline = directions(destination_id, destination_id)
         else
             polyline = directions(origin_id, destination_id)
         end
         coordinates = get_coordinates(destination_id)
-        static_map(coordinates, polyline)
+        static_map(coordinates, polyline, zoom)
     end
 
 
