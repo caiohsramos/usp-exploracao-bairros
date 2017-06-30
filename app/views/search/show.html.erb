@@ -13,7 +13,15 @@
         <br>
 
         <h4><span class="glyphicon glyphicon-earphone"></span> Telefone:</h4>
-        <address><%= @formatted_number %></address>
+        <% if @formatted_number %>
+
+            <address><%= @formatted_number %></address>
+
+        <% else %>
+
+            Nenhum número disponível<br>
+
+        <% end %>
 
         <br>
 
@@ -76,41 +84,50 @@
         <br>
         <h4><span class="glyphicon glyphicon-comment"></span> Comentários:</h4>
         <table class="table table-hover">
-            <tbody>
-            <% @reviews.each do |review| %>
-                <% if User.exists?(review.user_id) %>
-                    <tr>
-                        <td width="100"><img src=<%= GravatarApi.small_photo(User.find(review.user_id).email) %>></td>
-                        <td>
-                            <h5>
-                                <%= link_to User.find(review.user_id).name, user_path(id: User.encrypt(review.user_id)) %>
-                                <br>
-                                <small><%= review.updated_at %></small>
-                            </h5>
+            <% if @reviews.empty? %>
 
-                            <%= review.comment %>
-                        </td>
-                        <td class="text-center">
-                            <b>Avaliação</b>
-                            <h3><%= review.rate %></h3>
-                        </td>
+                Nenhum comentário ainda
 
-                        <% if current_user %>
-                            <% if review.user_id == current_user.id or current_user.admin %>
-                                <td class="text-right">
-                                    <%= link_to 'Editar', edit_review_path(review), class: 'btn btn-warning' %>
-                                    <%= link_to 'Apagar', review, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
-                                </td>
+            <% else %>
+
+                <tbody>
+                <% @reviews.each do |review| %>
+                    <% if User.exists?(review.user_id) %>
+                        <tr>
+                            <td width="100"><img src=<%= GravatarApi.small_photo(User.find(review.user_id).email) %>>
+                            </td>
+                            <td>
+                                <h5>
+                                    <%= link_to User.find(review.user_id).name, user_path(id: User.encrypt(review.user_id)) %>
+                                    <br>
+                                    <small><%= review.updated_at %></small>
+                                </h5>
+
+                                <%= review.comment %>
+                            </td>
+                            <td class="text-center">
+                                <b>Avaliação</b>
+                                <h3><%= review.rate %></h3>
+                            </td>
+
+                            <% if current_user %>
+                                <% if review.user_id == current_user.id or current_user.admin %>
+                                    <td class="text-right">
+                                        <%= link_to 'Editar', edit_review_path(review), class: 'btn btn-warning' %>
+                                        <%= link_to 'Apagar', review, method: :delete, data: {confirm: 'Você tem certeza?'}, class: 'btn btn-danger' %>
+                                    </td>
+                                <% end %>
+                            <% else %>
+                                <th colspan="4"></th>
                             <% end %>
-                        <% else %>
-                            <th colspan="4"></th>
-                        <% end %>
-                    </tr>
-                <% else %>
-                    <% review.destroy %>
+                        </tr>
+                    <% else %>
+                        <% review.destroy %>
+                    <% end %>
                 <% end %>
+                </tbody>
+
             <% end %>
-            </tbody>
         </table>
     </div>
 </div>
