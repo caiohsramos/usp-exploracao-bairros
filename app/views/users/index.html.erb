@@ -1,25 +1,17 @@
-<div class="container">
-    <div class="row">
-        <h3>Usuários</h3>
+<h4><span class="glyphicon glyphicon-user"></span> Usuários</h4>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th colspan="1"></th>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th colspan="4"></th>
-            </tr>
-            </thead>
+<div class="row">
 
-            <tbody>
-            <% @users.each do |user| %>
-                <tr>
-                    <%= render user %>
-                </tr>
-            <% end %>
-            </tbody>
-        </table>
+    <% @users.each do |user| %>
 
-    </div>
+        <div class="col-md-2">
+
+            <%= render user %>
+
+            <br>
+
+        </div>
+
+    <% end %>
+
 </div>

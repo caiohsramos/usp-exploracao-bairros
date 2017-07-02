@@ -20,7 +20,7 @@ class UserdataController < ApplicationController
     # GET /userdata/new
     def new
         if Userdatum.where('place_id = ?', params[:place_id])
-            redirect_to :back, notice: 'Você já adicionou este local' and return
+            redirect_to :back, alert: 'Você já adicionou este local' and return
         end
 
         @userdatum = Userdatum.new(:name => params[:name], :place_id => params[:place_id])
