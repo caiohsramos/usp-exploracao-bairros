@@ -7,7 +7,9 @@ bundle install
 ```
 ## Setar variável de ambiente domain:
 ```bash
-echo domain: "example.com">config/application.yml
+echo domain: "exploracao-bairros" > config/application.yml
+echo cipher: "secret" >> config/application.yml
+echo googleapikey: "AIzaSyAntuka0SlCnh1H3mRdlb1hrWFznQtf4PM" >> config/application.yml
 ```
 ## Iniciar o banco de dados:
 ```bash
@@ -17,7 +19,7 @@ rake db:migrate
 ## Para tornar-se Administrador:
 ```bash
 rails console
-user = User.where(email: 'example@example.com')
+user = User.where(email: 'your.email@example.com')
 user.first.update_attribute(:admin, true)
 ```
 

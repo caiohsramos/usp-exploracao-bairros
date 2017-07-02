@@ -1,22 +1,26 @@
-<div>
-    <h4><span class="glyphicon glyphicon-search"></span> Resultado da busca</h4>
+<h4><span class="glyphicon glyphicon-search"></span> Resultado da busca:</h4>
 
-    <img src=<%= @map %>>
-
-    <h4><span class="glyphicon glyphicon-filter"></span> Filtros:</h4>
-    <% @types.each do |type| %>
-        <%= link_to (t type), search_index_path(:search => @search, :radius => @radius, :type => type), class: 'label label-primary' %>
-    <% end %>
-    <%= link_to 'mostrar todos os resultados', search_index_path(:search => @search, :radius => @radius, :type => 'all'), class: 'label label-success' %>
-
+<div class="text-center">
+    <img src=<%= @map %> class="thumbnail">
+    Verifique se você selecionou este local (caso contrário refaça a busca com mais detalhes)
 </div>
 
-<br>
+<h4><span class="glyphicon glyphicon-filter"></span> Filtros:</h4>
+
+<% @types.each do |type| %>
+
+    <%= link_to (t type), search_index_path(:search => @search, :radius => @radius, :type => type), class: 'label label-primary' %>
+
+<% end %>
+
+<%= link_to 'mostrar todos os resultados', search_index_path(:search => @search, :radius => @radius, :type => 'all'), class: 'label label-success' %>
 
 <table class="table table-hover">
 
     <tbody>
+
     <% @results.each do |result| %>
+
         <tr>
             <td width="50"><img src=<%= result['icon'] %>></td>
 
@@ -36,13 +40,17 @@
                 <% end %>
             </td>
         </tr>
+
     <% end %>
+
     </tbody>
+
 </table>
 
 <%= link_to 'Voltar', :back, class: 'btn btn-default' %>
+
 <% if @next_page_token %>
+
     <%= link_to 'Próxima Página', search_index_path(:page_token => @next_page_token), class: 'btn btn-primary' %>
+
 <% end %>
-
-

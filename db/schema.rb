@@ -20,14 +20,6 @@ ActiveRecord::Schema.define(version: 20170526171726) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "neighborhoods", force: :cascade do |t|
-    t.string   "name",       default: ""
-    t.float    "lat"
-    t.float    "lon"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
   create_table "obfuscates", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

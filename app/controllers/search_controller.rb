@@ -15,7 +15,7 @@ class SearchController < ApplicationController
         @types = get_types(@results)
         @next_page_token = data['next_page_token']
         @origin_id = results['place_id']
-        @map = GoogleApi.get_map(@origin_id, @origin_id, 13)
+        @map = GoogleApi.get_map(@origin_id, @origin_id)
     end
 
     def show
