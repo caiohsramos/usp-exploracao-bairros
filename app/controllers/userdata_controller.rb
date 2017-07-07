@@ -19,7 +19,7 @@ class UserdataController < ApplicationController
 
     # GET /userdata/new
     def new
-        userdata = Userdatum.where('place_id = ?', params[:place_id])
+        userdata = Userdatum.where('user_id = ? AND place_id = ?', current_user.id, params[:place_id])
         if not userdata.empty?
             redirect_to :back, alert: 'Você já adicionou este local' and return
         end

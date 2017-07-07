@@ -1,13 +1,9 @@
-<div class="text-center">
+<img src=<%= GravatarApi.mid_photo(user.email) %> class="thumbnail">
 
-    <img src=<%= GravatarApi.mid_photo(user.email)%> class="thumbnail">
+<%= link_to user.name, user %>
 
-    <%= link_to user.name, user %>
+<br>
 
-    <br>
-
-    <% if current_user.admin %>
-        <%= link_to "Cancelar conta", destroy_user_path(user), :data => {:confirm => "Você tem certeza?"}, :method => :delete, :class => 'btn btn-danger' %>
-    <% end %>
-
-</div>
+<% if current_user.admin %>
+    <%= link_to "Cancelar conta", destroy_user_path(user), :data => {:confirm => "Você tem certeza?"}, :method => :delete, :class => 'btn btn-danger' %>
+<% end %>
