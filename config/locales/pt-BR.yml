@@ -20,6 +20,7 @@ pt-BR:
             email:
               invalid: "inválido"
               blank: "não pode estar em branco"
+              taken: "já cadastrado"
             password:
               too_short: "muito curta"
               blank: "não pode estar em branco"
