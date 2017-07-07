@@ -32,7 +32,7 @@
 
         <br>
 
-        <h4><span class="glyphicon glyphicon-star"></span> Avaliação</h4>
+        <h4><span class="glyphicon glyphicon-star"></span> Avaliação:</h4>
         <% if @count == 0 %>
             <address>Sem Avaliação</address>
         <% else %>
@@ -100,7 +100,7 @@
                                 <h5>
                                     <%= link_to User.find(review.user_id).name, user_path(id: User.encrypt(review.user_id)) %>
                                     <br>
-                                    <small><%= review.updated_at %></small>
+                                    <small>última atualização: <%= review.updated_at.strftime('%d/%m/%Y %H:%M') %></small>
                                 </h5>
 
                                 <%= review.comment %>
